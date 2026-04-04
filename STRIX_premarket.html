@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STRIX 盤前掃描</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080c14;
+  --bg2: #0d1220;
+  --bg3: #131928;
+  --border: #1a2438;
+  --accent: #00d4ff;
+  --accent2: #0099cc;
+  --green: #00e676;
+  --red: #ff4444;
+  --orange: #ff9500;
+  --yellow: #ffd60a;
+  --text: #e8eef8;
+  --text2: #7a8ba8;
+  --text3: #3a4a64;
+  --mono: 'DM Mono', monospace;
+  --sans: 'DM Sans', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* 背景網格 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* 頂部 */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.logo-main {
+  font-family: var(--mono);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 4px;
+}
+
+.logo-sub {
+  font-size: 12px;
+  color: var(--text3);
+  font-family: var(--mono);
+  letter-spacing: 2px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.update-time {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+}
+
+.scan-btn {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, var(--accent2), var(--accent));
+  color: var(--bg);
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--sans);
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+}
+.scan-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.scan-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* 篩選條件 */
+.filters {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-label {
+  font-size: 11px;
+  color: var(--text2);
+  font-family: var(--mono);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.filter-input {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: var(--text);
+  font-size: 13px;
+  font-family: var(--mono);
+  width: 80px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.filter-input:focus { border-color: var(--accent); }
+
+.filter-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border);
+}
+
+/* 大盤狀態 */
+.market-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.market-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.market-name {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text2);
+  letter-spacing: 1px;
+}
+
+.market-val {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.market-chg {
+  font-family: var(--mono);
+  font-size: 12px;
+  margin-top: 2px;
+}
+.market-chg.up { color: var(--green); }
+.market-chg.dn { color: var(--red); }
+
+/* 結果區 */
+.section-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: var(--mono);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* 候選卡片 */
+.top-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.top-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.top-card:hover { border-color: var(--accent2); }
+
+.top-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+}
+
+.top-rank {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  margin-bottom: 8px;
+}
+
+.top-ticker {
+  font-family: var(--mono);
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.top-name {
+  font-size: 12px;
+  color: var(--text2);
+  margin-bottom: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.top-stat { font-size: 12px; color: var(--text2); }
+.top-stat strong {
+  display: block;
+  font-size: 15px;
+  font-family: var(--mono);
+  color: var(--text);
+  margin-top: 2px;
+}
+
+.chg-up { color: var(--green) !important; }
+.chg-dn { color: var(--red) !important; }
+
+.verdict {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+.verdict.go { background: rgba(0,230,118,0.12); color: var(--green); }
+.verdict.watch { background: rgba(255,214,10,0.12); color: var(--yellow); }
+.verdict.skip { background: rgba(255,68,68,0.12); color: var(--red); }
+
+/* 完整列表 */
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th {
+  text-align: left;
+  padding: 10px 14px;
+  font-size: 10px;
+  color: var(--text3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-family: var(--mono);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+th:hover { color: var(--text2); }
+
+td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(26,36,56,0.5);
+  white-space: nowrap;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(0,212,255,0.03); }
+
+.td-ticker {
+  font-family: var(--mono);
+  font-weight: 500;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--mono);
+}
+.tag-go { background: rgba(0,230,118,0.12); color: var(--green); }
+.tag-watch { background: rgba(255,214,10,0.12); color: var(--yellow); }
+.tag-skip { background: rgba(255,68,68,0.12); color: var(--red); }
+.tag-na { background: rgba(58,74,100,0.3); color: var(--text3); }
+
+/* 載入動畫 */
+.loading-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px;
+  gap: 10px;
+  color: var(--text2);
+  font-size: 14px;
+}
+
+.spinner {
+  width: 20px; height: 20px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.empty {
+  text-align: center;
+  padding: 60px;
+  color: var(--text3);
+  font-size: 14px;
+  font-family: var(--mono);
+}
+
+/* 響應式 */
+@media (max-width: 600px) {
+  .logo-main { font-size: 18px; }
+  .filters { gap: 12px; }
+  .filter-divider { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 頂部 -->
+  <div class="header">
+    <div class="logo">
+      <span class="logo-main">STRIX</span>
+      <span class="logo-sub">盤前掃描系統</span>
+    </div>
+    <div class="header-right">
+      <span class="update-time" id="update-time">--</span>
+      <button class="scan-btn" id="scan-btn" onclick="runScan()">⟳ 開始掃描</button>
+    </div>
+  </div>
+
+  <!-- 篩選條件 -->
+  <div class="filters">
+    <div class="filter-group">
+      <span class="filter-label">漲幅 ≥</span>
+      <input class="filter-input" type="number" id="f-change" value="2" step="0.5">
+      <span class="filter-label">%</span>
+    </div>
+    <div class="filter-divider"></div>
+    <div class="filter-group">
+      <span class="filter-label">市值 ≥</span>
+      <input class="filter-input" type="number" id="f-mktcap" value="500" style="width:90px">
+      <span class="filter-label">百萬</span>
+    </div>
+    <div class="filter-divider"></div>
+    <div class="filter-group">
+      <span class="filter-label">股價</span>
+      <input class="filter-input" type="number" id="f-price-min" value="5">
+      <span class="filter-label">~</span>
+      <input class="filter-input" type="number" id="f-price-max" value="200">
+    </div>
+    <div class="filter-divider"></div>
+    <div class="filter-group">
+      <span class="filter-label">顯示</span>
+      <input class="filter-input" type="number" id="f-limit" value="20" style="width:60px">
+      <span class="filter-label">檔</span>
+    </div>
+  </div>
+
+  <!-- 大盤狀態 -->
+  <div class="market-bar" id="market-bar">
+    <div class="market-card">
+      <div>
+        <div class="market-name">QQQ</div>
+        <div class="market-val" id="m-qqq">--</div>
+        <div class="market-chg" id="m-qqq-chg">--</div>
+      </div>
+    </div>
+    <div class="market-card">
+      <div>
+        <div class="market-name">SPY</div>
+        <div class="market-val" id="m-spy">--</div>
+        <div class="market-chg" id="m-spy-chg">--</div>
+      </div>
+    </div>
+    <div class="market-card">
+      <div>
+        <div class="market-name">SOXX</div>
+        <div class="market-val" id="m-soxx">--</div>
+        <div class="market-chg" id="m-soxx-chg">--</div>
+      </div>
+    </div>
+    <div class="market-card">
+      <div>
+        <div class="market-name">大盤燈號</div>
+        <div class="market-val" id="m-signal" style="font-size:14px">--</div>
+        <div class="market-chg" id="m-signal-sub">等待數據</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 頂部候選 -->
+  <div class="section-title">今日候選標的</div>
+  <div class="top-grid" id="top-grid">
+    <div class="empty">按「開始掃描」獲取今日盤前數據</div>
+  </div>
+
+  <!-- 完整列表 -->
+  <div class="section-title">完整篩選結果</div>
+  <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden">
+    <div class="table-wrap">
+      <table id="result-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Ticker</th>
+            <th>公司</th>
+            <th onclick="sortTable('change')">盤前% ↕</th>
+            <th onclick="sortTable('price')">盤前價 ↕</th>
+            <th onclick="sortTable('volume')">成交量 ↕</th>
+            <th onclick="sortTable('mktcap')">市值 ↕</th>
+            <th>判斷</th>
+          </tr>
+        </thead>
+        <tbody id="result-body">
+          <tr><td colspan="8" class="empty">等待掃描...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+const API_URL = 'https://api.anthropic.com/v1/messages';
+let allData = [];
+let sortKey = 'change';
+let sortDir = -1;
+
+// ── 大盤數據 ──────────────────────────────────────────────────
+async function fetchMarket() {
+  const tickers = ['QQQ','SPY','SOXX'];
+  for (const t of tickers) {
+    try {
+      const r = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${t}?interval=1d&range=2d`);
+      const d = await r.json();
+      const q = d?.chart?.result?.[0];
+      if (!q) continue;
+      const close = q.meta?.regularMarketPrice;
+      const prev  = q.meta?.previousClose;
+      const chg   = prev ? ((close-prev)/prev*100) : 0;
+      const id = t === 'QQQ' ? 'qqq' : t === 'SPY' ? 'spy' : 'soxx';
+      document.getElementById('m-'+id).textContent = '$' + close?.toFixed(2);
+      const chgEl = document.getElementById('m-'+id+'-chg');
+      chgEl.textContent = (chg>=0?'+':'')+chg.toFixed(2)+'%';
+      chgEl.className = 'market-chg ' + (chg>=0?'up':'dn');
+    } catch(e) {}
+  }
+
+  // 大盤燈號
+  try {
+    const r = await fetch('https://query1.finance.yahoo.com/v8/finance/chart/QQQ?interval=1d&range=5d');
+    const d = await r.json();
+    const closes = d?.chart?.result?.[0]?.indicators?.quote?.[0]?.close || [];
+    let downDays = 0;
+    for (let i=closes.length-1; i>0; i--) {
+      if (closes[i] < closes[i-1]) downDays++;
+      else break;
+    }
+    const sigEl = document.getElementById('m-signal');
+    const subEl = document.getElementById('m-signal-sub');
+    if (downDays >= 3) {
+      sigEl.textContent = '🔴 紅燈';
+      sigEl.style.color = 'var(--red)';
+      subEl.textContent = 'QQQ連跌'+downDays+'天';
+      subEl.className = 'market-chg dn';
+    } else if (downDays >= 2) {
+      sigEl.textContent = '🟠 橘燈';
+      sigEl.style.color = 'var(--orange)';
+      subEl.textContent = 'QQQ連跌'+downDays+'天';
+      subEl.className = 'market-chg';
+    } else if (downDays >= 1) {
+      sigEl.textContent = '🟡 黃燈';
+      sigEl.style.color = 'var(--yellow)';
+      subEl.textContent = '謹慎操作';
+      subEl.className = 'market-chg';
+    } else {
+      sigEl.textContent = '🟢 正常';
+      sigEl.style.color = 'var(--green)';
+      subEl.textContent = '可正常操作';
+      subEl.className = 'market-chg up';
+    }
+  } catch(e) {}
+}
+
+// ── 抓 StockAnalysis 數據 ──────────────────────────────────────
+async function fetchPremarket() {
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 1000,
+      tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+      messages: [{
+        role: 'user',
+        content: `Go to https://stockanalysis.com/markets/premarket/gainers/ and return ALL the stocks in the table as JSON array.
+Each item: { symbol, name, change, price, volume, mktcap }
+change = % number (e.g. 5.23), price = number, volume = number, mktcap in millions as number.
+Return ONLY valid JSON array, no other text.`
+      }]
+    })
+  });
+
+  const data = await response.json();
+  const text = data.content.map(i => i.text || '').filter(Boolean).join('');
+  const match = text.match(/\[[\s\S]*\]/);
+  if (!match) throw new Error('No JSON found');
+  return JSON.parse(match[0]);
+}
+
+// ── 主掃描 ────────────────────────────────────────────────────
+async function runScan() {
+  const btn = document.getElementById('scan-btn');
+  btn.disabled = true;
+  btn.textContent = '掃描中...';
+
+  document.getElementById('top-grid').innerHTML = `
+    <div class="loading-wrap"><div class="spinner"></div> 正在抓取盤前數據...</div>`;
+  document.getElementById('result-body').innerHTML =
+    '<tr><td colspan="8" class="empty"><div class="loading-wrap"><div class="spinner"></div> 載入中...</div></td></tr>';
+
+  try {
+    await fetchMarket();
+    const raw = await fetchPremarket();
+
+    const minChg    = parseFloat(document.getElementById('f-change').value) || 2;
+    const minCap    = parseFloat(document.getElementById('f-mktcap').value) || 500;
+    const minPrice  = parseFloat(document.getElementById('f-price-min').value) || 5;
+    const maxPrice  = parseFloat(document.getElementById('f-price-max').value) || 200;
+    const limit     = parseInt(document.getElementById('f-limit').value) || 20;
+
+    allData = raw.filter(s =>
+      s.change >= minChg &&
+      s.mktcap >= minCap &&
+      s.price >= minPrice &&
+      s.price <= maxPrice
+    );
+
+    allData.sort((a,b) => b.change - a.change);
+
+    renderTopCards(allData.slice(0,3));
+    renderTable(allData.slice(0, limit));
+
+    document.getElementById('update-time').textContent =
+      '更新：' + new Date().toLocaleTimeString('zh-TW');
+
+  } catch(e) {
+    document.getElementById('top-grid').innerHTML =
+      `<div class="empty">抓取失敗：${e.message}</div>`;
+    document.getElementById('result-body').innerHTML =
+      `<tr><td colspan="8" class="empty">請重試</td></tr>`;
+  }
+
+  btn.disabled = false;
+  btn.textContent = '⟳ 重新掃描';
+}
+
+// ── 渲染頂部候選 ──────────────────────────────────────────────
+function renderTopCards(stocks) {
+  if (!stocks.length) {
+    document.getElementById('top-grid').innerHTML =
+      '<div class="empty">沒有符合條件的標的</div>';
+    return;
+  }
+  const html = stocks.map((s, i) => {
+    const verdict = getVerdict(s);
+    return `
+      <div class="top-card">
+        <div class="top-rank">NO.${i+1} 候選</div>
+        <div class="top-ticker">${s.symbol}</div>
+        <div class="top-name">${s.name}</div>
+        <div class="top-stats">
+          <div class="top-stat">盤前漲幅<strong class="chg-up">+${s.change.toFixed(2)}%</strong></div>
+          <div class="top-stat">盤前價<strong>$${s.price.toFixed(2)}</strong></div>
+          <div class="top-stat">成交量<strong>${fmtVol(s.volume)}</strong></div>
+          <div class="top-stat">市值<strong>${fmtCap(s.mktcap)}</strong></div>
+        </div>
+        <div class="verdict ${verdict.cls}">${verdict.text}｜評分 ${verdict.score}/11</div>
+      </div>`;
+  }).join('');
+  document.getElementById('top-grid').innerHTML = html;
+}
+
+// ── 渲染表格 ──────────────────────────────────────────────────
+function renderTable(stocks) {
+  if (!stocks.length) {
+    document.getElementById('result-body').innerHTML =
+      '<tr><td colspan="8" class="empty">沒有符合條件的標的</td></tr>';
+    return;
+  }
+  const html = stocks.map((s, i) => {
+    const verdict = getVerdict(s);
+    return `
+      <tr>
+        <td style="color:var(--text3);font-family:var(--mono)">${i+1}</td>
+        <td class="td-ticker">${s.symbol}</td>
+        <td style="color:var(--text2);font-size:12px;max-width:160px;overflow:hidden;text-overflow:ellipsis">${s.name}</td>
+        <td style="color:var(--green);font-family:var(--mono);font-weight:500">+${s.change.toFixed(2)}%</td>
+        <td style="font-family:var(--mono)">$${s.price.toFixed(2)}</td>
+        <td style="font-family:var(--mono);color:var(--text2)">${fmtVol(s.volume)}</td>
+        <td style="font-family:var(--mono);color:var(--text2)">${fmtCap(s.mktcap)}</td>
+        <td><span class="tag tag-${verdict.cls}">${verdict.text}</span> <span style="font-family:var(--mono);font-size:11px;color:var(--text3)">${verdict.score}/11</span></td>
+      </tr>`;
+  }).join('');
+  document.getElementById('result-body').innerHTML = html;
+}
+
+// ── 判斷邏輯 ──────────────────────────────────────────────────
+function getVerdict(s) {
+  let score = 0;
+
+  // 漲幅評分
+  if (s.change >= 8)       score += 3;
+  else if (s.change >= 5)  score += 2;
+  else if (s.change >= 3)  score += 1;
+
+  // 成交量評分（盤前有量才有意義）
+  if (s.volume >= 1000000)      score += 3;
+  else if (s.volume >= 500000)  score += 2;
+  else if (s.volume >= 100000)  score += 1;
+
+  // 市值評分（避免小型股被操控）
+  if (s.mktcap >= 5000)       score += 3;
+  else if (s.mktcap >= 1000)  score += 2;
+  else if (s.mktcap >= 500)   score += 1;
+
+  // 股價區間（你的資金範圍最適合的）
+  if (s.price >= 10 && s.price <= 60) score += 2;
+  else if (s.price >= 5 && s.price <= 100) score += 1;
+
+  if (score >= 9)       return { cls: 'go',    text: '✅ 強力候選', score };
+  else if (score >= 6)  return { cls: 'watch', text: '👀 值得觀察', score };
+  else                  return { cls: 'skip',  text: '⏭ 條件不足', score };
+}
+
+// ── 排序 ──────────────────────────────────────────────────────
+function sortTable(key) {
+  if (sortKey === key) sortDir *= -1;
+  else { sortKey = key; sortDir = -1; }
+  allData.sort((a,b) => (a[key]-b[key]) * sortDir);
+  const limit = parseInt(document.getElementById('f-limit').value) || 20;
+  renderTable(allData.slice(0, limit));
+}
+
+// ── 自動執行 ──────────────────────────────────────────────────
+window.addEventListener('load', function() {
+  runScan();
+});
+
+// ── 格式化 ────────────────────────────────────────────────────
+function fmtVol(v) {
+  if (!v) return '--';
+  if (v >= 1e6) return (v/1e6).toFixed(1)+'M';
+  if (v >= 1e3) return (v/1e3).toFixed(0)+'K';
+  return v.toString();
+}
+
+function fmtCap(m) {
+  if (!m) return '--';
+  if (m >= 1000) return '$'+(m/1000).toFixed(1)+'B';
+  return '$'+m.toFixed(0)+'M';
+}
+</script>
+</body>
+</html>
