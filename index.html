@@ -1,3 +1,6 @@
+Strix v24 new · HTML
+Copy
+
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
@@ -106,7 +109,7 @@ tr:hover td{background:rgba(0,212,255,0.02);}
 </style>
 </head>
 <body>
-
+ 
 <div id="lock">
   <div class="lbox">
     <div class="llogo">STRIX</div>
@@ -116,7 +119,7 @@ tr:hover td{background:rgba(0,212,255,0.02);}
     <div class="lerr" id="lerr"></div>
   </div>
 </div>
-
+ 
 <div id="app">
 <nav class="nav">
   <div class="nlogo">STRIX</div>
@@ -131,9 +134,9 @@ tr:hover td{background:rgba(0,212,255,0.02);}
   </div>
   <div class="ntime" id="ntime">--</div>
 </nav>
-
+ 
 <div class="main">
-
+ 
 <!-- 大盤 -->
 <div class="pg on" id="pg-market">
   <div class="g4" style="margin-bottom:14px">
@@ -167,7 +170,7 @@ tr:hover td{background:rgba(0,212,255,0.02);}
     </div>
   </div>
 </div>
-
+ 
 <!-- 盤前 -->
 <div class="pg" id="pg-premarket">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
@@ -185,7 +188,7 @@ tr:hover td{background:rgba(0,212,255,0.02);}
     <tbody id="pm-body"><tr><td colspan="9" class="empty">等待掃描...</td></tr></tbody>
   </table></div></div>
 </div>
-
+ 
 <!-- 技術面 -->
 <div class="pg" id="pg-technical">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
@@ -194,7 +197,7 @@ tr:hover td{background:rgba(0,212,255,0.02);}
   </div>
   <div id="tech-box"><div class="empty">點「更新技術面」載入（約需1分鐘）</div></div>
 </div>
-
+ 
 <!-- 基本面 -->
 <div class="pg" id="pg-fundamental">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
@@ -206,7 +209,7 @@ tr:hover td{background:rgba(0,212,255,0.02);}
     <tbody id="fund-body"><tr><td colspan="11" class="empty">點「更新基本面」載入</td></tr></tbody>
   </table></div></div>
 </div>
-
+ 
 <!-- 持倉 -->
 <div class="pg" id="pg-holdings">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
@@ -219,7 +222,7 @@ tr:hover td{background:rgba(0,212,255,0.02);}
     <tbody id="htable"></tbody>
   </table></div></div>
 </div>
-
+ 
 <!-- 選股池 -->
 <div class="pg" id="pg-watchlist">
   <div style="font-size:18px;font-weight:700;margin-bottom:14px">選股池</div>
@@ -228,7 +231,7 @@ tr:hover td{background:rgba(0,212,255,0.02);}
     <tbody id="wbody"><tr><td colspan="7" class="empty">請先更新技術面和基本面</td></tr></tbody>
   </table></div></div>
 </div>
-
+ 
 <!-- 新聞 -->
 <div class="pg" id="pg-news">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
@@ -249,45 +252,45 @@ tr:hover td{background:rgba(0,212,255,0.02);}
   </div>
   <div id="news-box"><div class="empty">點「載入新聞」獲取最新消息</div></div>
 </div>
-
+ 
 </div></div>
-
+ 
 <script>
 var FMP  = 'IoPRCJ0d907kdhMBwWmgH8on0loCOGBA';
 var BASE = 'https://financialmodelingprep.com/stable';
 var AI   = 'https://api.anthropic.com/v1/messages';
 var PWH  = '0942a2760d0547a4d90ebb9a7ddb95b5caf33d07dab0023bc4790cfc6db912e2';
-
+ 
 var TICKERS = ['NVDA','GOOGL','MSFT','META','TSLA','TSM','LITE','PLTR','MU','SNDK','VRT','LEU','NBIS','ALAB','RKLB','AXTI','IREN','SOFI','ONDS','BBAI','NVTS','ASPI','RXRX'];
-
+ 
 var HOLDINGS = {
   'NBIS': { cost:93,    qty:177,  type:'C' },
   'ONDS': { cost:9.45,  qty:1960, type:'C' },
   'AXTI': { cost:65.62, qty:60,   type:'C' }
 };
-
+ 
 var HIST_PE = { 'NVDA':35,'GOOGL':22,'MSFT':30,'META':25,'TSLA':60,'TSM':18,'LITE':20,'PLTR':80,'MU':15,'SNDK':20,'VRT':30,'LEU':20,'NBIS':50,'ALAB':40,'RKLB':200,'AXTI':25,'IREN':20,'SOFI':30,'ONDS':999,'BBAI':50,'NVTS':30,'ASPI':30,'RXRX':30 };
-
+ 
 var TL = ['週K均線','週K趨勢','週K型態','週K支撐','RSI','日K回踩','日K縮量','日K型態','放量確認','量比趨勢','距前高%','高低結構'];
-
+ 
 var BATCHES = [
   ['NVDA','GOOGL','MSFT','META','TSLA','TSM','LITE'],
   ['PLTR','MU','SNDK','VRT','LEU','NBIS','ALAB','RKLB'],
   ['AXTI','IREN','SOFI','ONDS','BBAI','NVTS','ASPI','RXRX']
 ];
-
+ 
 var techS = JSON.parse(localStorage.getItem('st_tech') || '{}');
 var fundS = JSON.parse(localStorage.getItem('st_fund') || '{}');
 var fundM = JSON.parse(localStorage.getItem('st_fundm') || '{}');
 var manual = JSON.parse(localStorage.getItem('st_man') || '{}');
 var pCache = {};
-
+ 
 // 密碼
 async function sha(s) {
   var b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
   return Array.from(new Uint8Array(b)).map(function(x){ return x.toString(16).padStart(2,'0'); }).join('');
 }
-
+ 
 async function unlock() {
   var h = await sha(document.getElementById('lpw').value);
   if (h === PWH) {
@@ -303,16 +306,16 @@ async function unlock() {
     setTimeout(function(){ i.classList.remove('err'); document.getElementById('lerr').textContent = ''; }, 700);
   }
 }
-
+ 
 document.getElementById('lpw').addEventListener('keydown', function(e){ if(e.key==='Enter') unlock(); });
 document.getElementById('lbtn').addEventListener('click', unlock);
-
+ 
 if (sessionStorage.getItem('sa') === '1') {
   document.getElementById('lock').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   window.addEventListener('load', init);
 }
-
+ 
 // 頁面切換
 function go(name, el) {
   document.querySelectorAll('.pg').forEach(function(p){ p.classList.remove('on'); });
@@ -320,7 +323,7 @@ function go(name, el) {
   document.getElementById('pg-'+name).classList.add('on');
   if (el) el.classList.add('on');
 }
-
+ 
 // FMP API
 async function fmpQ(t) {
   try {
@@ -330,7 +333,7 @@ async function fmpQ(t) {
     return d && d.length ? d[0] : null;
   } catch(e) { return null; }
 }
-
+ 
 async function fmpH(t, n) {
   try {
     var r = await fetch(BASE+'/historical-price-eod/light?symbol='+t+'&limit='+n+'&apikey='+FMP);
@@ -339,15 +342,15 @@ async function fmpH(t, n) {
     return d && d.length ? d.reverse() : null;
   } catch(e) { return null; }
 }
-
+ 
 function sleep(ms) { return new Promise(function(r){ setTimeout(r,ms); }); }
-
+ 
 // 計算
 function MA(a, n) {
   if (!a || a.length < n) return null;
   return a.slice(-n).reduce(function(x,y){ return x+y; }, 0) / n;
 }
-
+ 
 function RSI(c) {
   if (!c || c.length < 15) return null;
   var g=0, l=0;
@@ -358,26 +361,26 @@ function RSI(c) {
   var ag=g/14, al=l/14;
   return al===0 ? 100 : 100-100/(1+ag/al);
 }
-
+ 
 function fV(v) {
   if (!v) return '--';
   if (v >= 1e6) return (v/1e6).toFixed(1)+'M';
   if (v >= 1e3) return (v/1e3).toFixed(0)+'K';
   return String(v);
 }
-
+ 
 function fC(m) {
   if (!m) return '--';
   if (m >= 1000) return '$'+(m/1000).toFixed(1)+'B';
   return '$'+m.toFixed(0)+'M';
 }
-
+ 
 function clrScore(n) {
   if (n >= 6) return 'var(--green)';
   if (n >= 4) return 'var(--yellow)';
   return 'var(--red)';
 }
-
+ 
 // 初始化
 async function init() {
   setInterval(function(){ document.getElementById('ntime').textContent = new Date().toLocaleTimeString('zh-TW'); }, 1000);
@@ -388,7 +391,7 @@ async function init() {
   await loadHold();
   scanPM();
 }
-
+ 
 // 大盤
 async function loadMarket() {
   var etfs = [['QQQ','qqq'],['SOXX','soxx'],['SPY','spy']];
@@ -432,7 +435,7 @@ async function loadMarket() {
   }
   calcSignal();
 }
-
+ 
 function calcSignal() {
   var qd = parseInt(document.getElementById('i-qd').value) || 0;
   var sd = parseInt(document.getElementById('i-sd').value) || 0;
@@ -443,7 +446,7 @@ function calcSignal() {
   else if (qd>=1) { st.textContent='🟡 黃燈 注意'; st.className='tag ty'; ac.textContent='不追價 等回踩'; ac.className='tag ty'; }
   else { st.textContent='🟢 趨勢正常'; st.className='tag tg'; ac.textContent='正常操作'; ac.className='tag tg'; }
 }
-
+ 
 function saveM() {
   localStorage.setItem('st_man', JSON.stringify({
     qd: document.getElementById('i-qd').value,
@@ -452,7 +455,7 @@ function saveM() {
     sh: document.getElementById('i-sh').value
   }));
 }
-
+ 
 function loadManual() {
   if (manual.qd) document.getElementById('i-qd').value = manual.qd;
   if (manual.sd) document.getElementById('i-sd').value = manual.sd;
@@ -460,7 +463,7 @@ function loadManual() {
   if (manual.sh) document.getElementById('i-sh').value = manual.sh;
   calcSignal();
 }
-
+ 
 // 盤前
 async function scanPM() {
   document.getElementById('pm-top').innerHTML = '<div class="loading"><div class="spin"></div> 正在抓取盤前數據...</div>';
@@ -494,7 +497,7 @@ async function scanPM() {
     document.getElementById('pm-body').innerHTML = '<tr><td colspan="9" class="empty">請重試</td></tr>';
   }
 }
-
+ 
 function pmSc(s) {
   var sc = 0;
   if (s.change>=8) sc+=3; else if (s.change>=5) sc+=2; else if (s.change>=3) sc+=1;
@@ -503,13 +506,13 @@ function pmSc(s) {
   if (s.price>=10&&s.price<=60) sc+=2; else if (s.price>=5&&s.price<=100) sc+=1;
   return sc;
 }
-
+ 
 function pmV(sc) {
   if (sc>=9) return {c:'tg',t:'✅ 強力候選'};
   if (sc>=6) return {c:'ty',t:'👀 值得觀察'};
   return {c:'tg2',t:'⏭ 條件不足'};
 }
-
+ 
 function renderPMTop(arr) {
   if (!arr.length) { document.getElementById('pm-top').innerHTML='<div class="empty">沒有符合條件的標的</div>'; return; }
   var html = '';
@@ -533,7 +536,7 @@ function renderPMTop(arr) {
   }
   document.getElementById('pm-top').innerHTML = html;
 }
-
+ 
 function renderPMTbl(arr) {
   if (!arr.length) { document.getElementById('pm-body').innerHTML='<tr><td colspan="9" class="empty">沒有符合條件的標的</td></tr>'; return; }
   var html = '';
@@ -553,7 +556,7 @@ function renderPMTbl(arr) {
   }
   document.getElementById('pm-body').innerHTML = html;
 }
-
+ 
 // 技術面
 async function loadTech() {
   var btn = document.getElementById('tb');
@@ -643,7 +646,7 @@ async function loadTech() {
   renderWatch();
   btn.disabled=false; btn.textContent='⟳ 更新技術面';
 }
-
+ 
 // 基本面
 async function loadFund() {
   var btn = document.getElementById('fb');
@@ -707,13 +710,13 @@ async function loadFund() {
   renderWatch();
   btn.disabled=false; btn.textContent='⟳ 更新基本面';
 }
-
+ 
 function upFM(tk, f, v) {
   if (!fundM[tk]) fundM[tk]={g:0,t:0};
   fundM[tk][f] = parseInt(v);
   localStorage.setItem('st_fundm', JSON.stringify(fundM));
 }
-
+ 
 // 持倉
 async function loadHold() {
   var tks = Object.keys(HOLDINGS);
@@ -723,7 +726,7 @@ async function loadHold() {
   }
   renderHold();
 }
-
+ 
 function renderHold() {
   var tks = Object.keys(HOLDINGS);
   var ch = '', th = '';
@@ -762,7 +765,7 @@ function renderHold() {
   document.getElementById('hcards').innerHTML = ch;
   document.getElementById('htable').innerHTML = th;
 }
-
+ 
 // 選股池
 function renderWatch() {
   var html = '';
@@ -795,7 +798,7 @@ function renderWatch() {
   }
   document.getElementById('wbody').innerHTML = html;
 }
-
+ 
 // 新聞
 async function loadNews() {
   document.getElementById('news-box').innerHTML = '<div class="loading"><div class="spin"></div> 正在抓取新聞...</div>';
