@@ -23,9 +23,9 @@
   --mono: 'Space Mono', monospace;
   --sans: 'Noto Sans TC', sans-serif;
 }
-
+ 
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
+ 
 body {
   background: var(--bg);
   color: var(--text);
@@ -33,7 +33,7 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
-
+ 
 /* ── 頂部導航 ── */
 .topbar {
   position: fixed;
@@ -48,7 +48,7 @@ body {
   z-index: 100;
   gap: 8px;
 }
-
+ 
 .logo {
   font-family: var(--mono);
   font-size: 18px;
@@ -57,9 +57,9 @@ body {
   letter-spacing: 3px;
   margin-right: 8px;
 }
-
+ 
 .logo span { color: var(--text3); font-size: 12px; }
-
+ 
 .nav-tabs {
   display: flex;
   gap: 2px;
@@ -68,7 +68,7 @@ body {
   scrollbar-width: none;
 }
 .nav-tabs::-webkit-scrollbar { display: none; }
-
+ 
 .tab {
   padding: 6px 14px;
   border-radius: 6px;
@@ -84,7 +84,7 @@ body {
 }
 .tab:hover { color: var(--text); background: var(--bg3); }
 .tab.active { color: var(--accent2); background: rgba(59,130,246,0.12); }
-
+ 
 .update-btn {
   padding: 7px 16px;
   background: var(--accent);
@@ -100,7 +100,7 @@ body {
 }
 .update-btn:hover { background: var(--accent2); }
 .update-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
+ 
 /* ── 主內容 ── */
 .main {
   padding-top: 72px;
@@ -110,10 +110,10 @@ body {
   padding-left: 16px;
   padding-right: 16px;
 }
-
+ 
 .page { display: none; }
 .page.active { display: block; }
-
+ 
 /* ── 卡片 ── */
 .card {
   background: var(--bg2);
@@ -122,7 +122,7 @@ body {
   padding: 20px;
   margin-bottom: 16px;
 }
-
+ 
 .card-title {
   font-size: 13px;
   font-weight: 500;
@@ -134,7 +134,7 @@ body {
   align-items: center;
   gap: 8px;
 }
-
+ 
 /* ── 大盤頁 ── */
 .market-grid {
   display: grid;
@@ -142,14 +142,14 @@ body {
   gap: 16px;
   margin-bottom: 16px;
 }
-
+ 
 .market-card {
   background: var(--bg2);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 20px;
 }
-
+ 
 .market-card .label {
   font-size: 12px;
   color: var(--text3);
@@ -157,7 +157,7 @@ body {
   letter-spacing: 1px;
   margin-bottom: 8px;
 }
-
+ 
 .market-card .value {
   font-size: 32px;
   font-family: var(--mono);
@@ -165,14 +165,14 @@ body {
   color: var(--text);
   margin-bottom: 4px;
 }
-
+ 
 .market-card .sub {
   font-size: 12px;
   color: var(--text2);
   display: flex;
   gap: 12px;
 }
-
+ 
 .signal-box {
   background: var(--bg3);
   border-radius: 8px;
@@ -183,15 +183,15 @@ body {
   margin-bottom: 8px;
   border: 1px solid var(--border);
 }
-
+ 
 .signal-label { font-size: 14px; color: var(--text2); }
-
+ 
 .signal-value {
   font-size: 14px;
   font-weight: 600;
   font-family: var(--mono);
 }
-
+ 
 .tag {
   display: inline-flex;
   align-items: center;
@@ -207,16 +207,16 @@ body {
 .tag.yellow { background: rgba(234,179,8,0.15); color: var(--yellow); }
 .tag.blue { background: rgba(59,130,246,0.15); color: var(--accent2); }
 .tag.gray { background: rgba(71,85,105,0.3); color: var(--text2); }
-
+ 
 /* ── 表格 ── */
 .table-wrap { overflow-x: auto; }
-
+ 
 table {
   width: 100%;
   border-collapse: collapse;
   font-size: 13px;
 }
-
+ 
 th {
   text-align: left;
   padding: 10px 12px;
@@ -229,24 +229,24 @@ th {
   white-space: nowrap;
   font-family: var(--mono);
 }
-
+ 
 td {
   padding: 12px 12px;
   border-bottom: 1px solid rgba(30,42,74,0.5);
   color: var(--text);
   white-space: nowrap;
 }
-
+ 
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: rgba(255,255,255,0.02); }
-
+ 
 .ticker-cell {
   font-family: var(--mono);
   font-weight: 700;
   color: var(--accent2);
   font-size: 14px;
 }
-
+ 
 /* ── 評分條 ── */
 .score-bar {
   display: flex;
@@ -273,7 +273,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   min-width: 32px;
   text-align: right;
 }
-
+ 
 /* ── 可編輯格 ── */
 .editable {
   background: transparent;
@@ -292,7 +292,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   border-color: var(--accent);
   background: var(--bg3);
 }
-
+ 
 /* ── 網格佈局 ── */
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
@@ -303,7 +303,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 @media (max-width: 480px) {
   .market-grid { grid-template-columns: 1fr; }
 }
-
+ 
 /* ── 評分格子 ── */
 .score-grid {
   display: grid;
@@ -328,7 +328,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .score-cell[data-v="1"] { background: rgba(234,179,8,0.15); color: #eab308; }
 .score-cell[data-v="2"] { background: rgba(34,197,94,0.15); color: #22c55e; }
 .score-cell:hover { transform: scale(1.1); border-color: var(--accent); }
-
+ 
 /* ── 持倉卡片 ── */
 .holding-card {
   background: var(--bg2);
@@ -347,7 +347,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .holding-card.profit::before { background: var(--green); }
 .holding-card.loss::before { background: var(--red); }
 .holding-card.warn::before { background: var(--orange); }
-
+ 
 .holding-ticker {
   font-family: var(--mono);
   font-size: 20px;
@@ -363,7 +363,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 }
 .holding-pnl.up { color: var(--green); }
 .holding-pnl.down { color: var(--red); }
-
+ 
 .holding-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -371,7 +371,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 }
 .holding-detail { font-size: 12px; color: var(--text2); }
 .holding-detail strong { color: var(--text); display: block; font-size: 14px; }
-
+ 
 /* ── 頁面標題 ── */
 .page-header {
   margin-bottom: 20px;
@@ -387,7 +387,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   color: var(--text);
 }
 .page-sub { font-size: 13px; color: var(--text2); margin-top: 2px; }
-
+ 
 /* ── 空狀態 ── */
 .empty {
   text-align: center;
@@ -395,7 +395,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   color: var(--text3);
   font-size: 14px;
 }
-
+ 
 /* ── Loading ── */
 .loading {
   display: inline-flex;
@@ -419,10 +419,10 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   0%,80%,100% { opacity: 0.2; transform: scale(0.8); }
   40% { opacity: 1; transform: scale(1); }
 }
-
+ 
 /* ── 盤前篩選 ── */
 .filter-row td:first-child { font-family: var(--mono); font-weight: 700; color: var(--accent2); }
-
+ 
 /* ── 底部時間戳 ── */
 .timestamp {
   font-size: 11px;
@@ -431,8 +431,106 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   text-align: right;
   margin-top: 8px;
 }
-
-/* ── 手機底部導航 ── */
+ 
+/* ── 新聞中心 ── */
+.news-cat {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text2);
+  transition: all 0.2s;
+  font-family: var(--sans);
+}
+.news-cat:hover { color: var(--text); border-color: var(--accent); }
+.news-cat.active { background: rgba(59,130,246,0.15); color: var(--accent2); border-color: var(--accent); }
+ 
+.news-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  transition: border-color 0.2s;
+}
+.news-card:hover { border-color: var(--accent2); }
+ 
+.news-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+ 
+.news-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.4;
+  flex: 1;
+}
+ 
+.news-tag {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: var(--mono);
+  white-space: nowrap;
+  letter-spacing: 0.5px;
+}
+.news-tag.market { background: rgba(59,130,246,0.15); color: var(--accent2); }
+.news-tag.tech    { background: rgba(168,85,247,0.15); color: #c084fc; }
+.news-tag.semi    { background: rgba(234,179,8,0.15);  color: var(--yellow); }
+.news-tag.fed     { background: rgba(249,115,22,0.15); color: var(--orange); }
+.news-tag.holdings{ background: rgba(34,197,94,0.15);  color: var(--green); }
+ 
+.news-summary {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+ 
+.news-impact {
+  font-size: 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.news-impact.bull { background: rgba(34,197,94,0.08); border-left: 3px solid var(--green); color: #86efac; }
+.news-impact.bear { background: rgba(239,68,68,0.08); border-left: 3px solid var(--red); color: #fca5a5; }
+.news-impact.neutral { background: rgba(71,85,105,0.2); border-left: 3px solid var(--text3); color: var(--text2); }
+ 
+.news-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text3);
+  font-family: var(--mono);
+}
+ 
+.news-tickers {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+ 
+.news-ticker-tag {
+  padding: 2px 6px;
+  background: rgba(96,165,250,0.1);
+  color: var(--accent2);
+  border-radius: 4px;
+  font-size: 11px;
+  font-family: var(--mono);
+}
+ 
 @media (max-width: 600px) {
   .topbar { padding: 0 12px; }
   .logo span { display: none; }
@@ -440,7 +538,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   .tab { padding: 6px 10px; font-size: 12px; }
   .update-btn { padding: 6px 10px; font-size: 12px; }
 }
-
+ 
 /* ── 密碼鎖定頁 ── */
 #lock-screen {
   position: fixed; inset: 0;
@@ -489,7 +587,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 </style>
 </head>
 <body>
-
+ 
 <!-- 密碼鎖定頁 -->
 <div id="lock-screen">
   <div class="lock-box">
@@ -502,10 +600,10 @@ tr:hover td { background: rgba(255,255,255,0.02); }
     <div class="lock-err" id="lock-err"></div>
   </div>
 </div>
-
+ 
 <!-- 主系統 -->
 <div id="app">
-
+ 
 <!-- 頂部導航 -->
 <div class="topbar">
   <div class="logo">STRIX <span>V24</span></div>
@@ -516,12 +614,13 @@ tr:hover td { background: rgba(255,255,255,0.02); }
     <button class="tab" onclick="showPage('fundamental')">📋 基本面</button>
     <button class="tab" onclick="showPage('holdings')">💼 持倉</button>
     <button class="tab" onclick="showPage('watchlist')">🔍 選股池</button>
+    <button class="tab" onclick="showPage('news');loadNews()">📰 新聞</button>
   </div>
   <button class="update-btn" onclick="updateAll()" id="updateBtn">⟳ 更新</button>
 </div>
-
+ 
 <div class="main">
-
+ 
   <!-- ══════════════ 大盤頁 ══════════════ -->
   <div class="page active" id="page-market">
     <div class="page-header">
@@ -531,7 +630,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
       </div>
       <div class="timestamp" id="market-time">--</div>
     </div>
-
+ 
     <div class="market-grid">
       <div class="market-card">
         <div class="label">QQQ</div>
@@ -557,7 +656,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
         </div>
       </div>
     </div>
-
+ 
     <div class="card">
       <div class="card-title">⚡ 大盤燈號</div>
       <div class="signal-box">
@@ -581,7 +680,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
         <span class="tag gray" id="sig-action">填入大盤數據後顯示</span>
       </div>
     </div>
-
+ 
     <!-- 手填區 -->
     <div class="card">
       <div class="card-title">✏️ 手填數據</div>
@@ -611,36 +710,75 @@ tr:hover td { background: rgba(255,255,255,0.02); }
       </div>
     </div>
   </div>
-
+ 
   <!-- ══════════════ 盤前篩選頁 ══════════════ -->
   <div class="page" id="page-premarket">
     <div class="page-header">
       <div>
-        <div class="page-title">盤前篩選</div>
-        <div class="page-sub">填入盤前價 → 自動篩選候選標的</div>
+        <div class="page-title">盤前掃描</div>
+        <div class="page-sub">自動抓取全市場盤前強勢股 · 開啟頁面自動掃描</div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span class="timestamp" id="pm-update-time">--</span>
+        <button class="update-btn" id="pm-scan-btn" onclick="runPremarketScan()">⟳ 重新掃描</button>
       </div>
     </div>
+ 
+    <!-- 篩選條件 -->
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-title">⚙️ 篩選條件</div>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:12px;color:var(--text2)">漲幅 ≥</span>
+          <input id="pm-change" type="number" value="2" step="0.5" style="width:70px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:13px;font-family:var(--mono);outline:none">
+          <span style="font-size:12px;color:var(--text2)">%</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:12px;color:var(--text2)">市值 ≥</span>
+          <input id="pm-mktcap" type="number" value="500" style="width:80px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:13px;font-family:var(--mono);outline:none">
+          <span style="font-size:12px;color:var(--text2)">百萬</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:12px;color:var(--text2)">股價</span>
+          <input id="pm-price-min" type="number" value="5" style="width:60px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:13px;font-family:var(--mono);outline:none">
+          <span style="font-size:12px;color:var(--text2)">~</span>
+          <input id="pm-price-max" type="number" value="200" style="width:70px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:13px;font-family:var(--mono);outline:none">
+        </div>
+      </div>
+    </div>
+ 
+    <!-- 頂部候選卡片 -->
+    <div class="card-title" style="margin-bottom:12px">🏆 今日候選標的</div>
+    <div id="pm-top-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:20px">
+      <div class="empty">載入中...</div>
+    </div>
+ 
+    <!-- 完整列表 -->
     <div class="card">
-      <div class="card-title">📋 觀察清單</div>
+      <div class="card-title">📋 完整篩選結果</div>
       <div class="table-wrap">
-        <table id="premarket-table">
+        <table>
           <thead>
             <tr>
+              <th>#</th>
               <th>Ticker</th>
-              <th>前收</th>
-              <th>盤前價</th>
-              <th>量比</th>
+              <th>公司</th>
               <th>盤前%</th>
-              <th>強度</th>
-              <th>可執行</th>
+              <th>盤前價</th>
+              <th>成交量</th>
+              <th>市值</th>
+              <th>評分</th>
+              <th>判斷</th>
             </tr>
           </thead>
-          <tbody id="premarket-body"></tbody>
+          <tbody id="pm-result-body">
+            <tr><td colspan="9" class="empty">等待掃描...</td></tr>
+          </tbody>
         </table>
       </div>
     </div>
   </div>
-
+ 
   <!-- ══════════════ 技術面頁 ══════════════ -->
   <div class="page" id="page-technical">
     <div class="page-header">
@@ -649,10 +787,10 @@ tr:hover td { background: rgba(255,255,255,0.02); }
         <div class="page-sub">週K趨勢 + 日K進場 · 每項0-2分 · 共12項 · 總分24→標準化10</div>
       </div>
     </div>
-
+ 
     <div id="tech-cards"></div>
   </div>
-
+ 
   <!-- ══════════════ 基本面頁 ══════════════ -->
   <div class="page" id="page-fundamental">
     <div class="page-header">
@@ -661,7 +799,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
         <div class="page-sub">每季財報後更新 · 總分21→標準化10</div>
       </div>
     </div>
-
+ 
     <div class="card">
       <div class="card-title">📊 評分總覽</div>
       <div class="table-wrap">
@@ -686,7 +824,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
       </div>
     </div>
   </div>
-
+ 
   <!-- ══════════════ 持倉追蹤頁 ══════════════ -->
   <div class="page" id="page-holdings">
     <div class="page-header">
@@ -696,7 +834,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
       </div>
     </div>
     <div class="grid-3" id="holdings-cards"></div>
-
+ 
     <div class="card">
       <div class="card-title">📊 持倉彙總</div>
       <div class="table-wrap">
@@ -721,7 +859,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
       </div>
     </div>
   </div>
-
+ 
   <!-- ══════════════ 選股池頁 ══════════════ -->
   <div class="page" id="page-watchlist">
     <div class="page-header">
@@ -753,27 +891,59 @@ tr:hover td { background: rgba(255,255,255,0.02); }
       </div>
     </div>
   </div>
-
+ 
+  <!-- ══════════════ 新聞中心頁 ══════════════ -->
+  <div class="page" id="page-news">
+    <div class="page-header">
+      <div>
+        <div class="page-title">新聞中心</div>
+        <div class="page-sub">美股重點新聞 · AI自動摘要 · 每次點選更新</div>
+      </div>
+      <button class="update-btn" onclick="loadNews()" id="news-btn">⟳ 重新整理</button>
+    </div>
+ 
+    <!-- 新聞分類 -->
+    <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+      <button class="news-cat active" onclick="filterNews('all',this)">全部</button>
+      <button class="news-cat" onclick="filterNews('market',this)">大盤</button>
+      <button class="news-cat" onclick="filterNews('tech',this)">科技/AI</button>
+      <button class="news-cat" onclick="filterNews('semi',this)">半導體</button>
+      <button class="news-cat" onclick="filterNews('fed',this)">Fed/總經</button>
+      <button class="news-cat" onclick="filterNews('holdings',this)">持倉相關</button>
+    </div>
+ 
+    <!-- 新聞載入狀態 -->
+    <div id="news-loading" style="display:none" class="card">
+      <div class="empty">
+        <div class="loading"><div class="dot-pulse"><span></span><span></span><span></span></div> AI正在整理今日重點新聞...</div>
+      </div>
+    </div>
+ 
+    <!-- 新聞內容 -->
+    <div id="news-container"></div>
+ 
+  </div>
+ 
 </div><!-- /main -->
-
+ 
 <script>
 // ══════════════════════════════════════════
 // 設定
 // ══════════════════════════════════════════
 const FMP_KEY = 'IoPRCJ0d907kdhMBwWmgH8on0loCOGBA';
 const BASE = 'https://financialmodelingprep.com/stable';
-
+ 
 const WATCHLIST = ['NVDA','GOOGL','LITE','TSLA','TSM','LEU','NBIS','ONDS','BBAI','RKLB','MU','IREN','DELL','NVTS','AXTI','ALAB','RXRX'];
 const SCORE_TICKERS = ['NVDA','NBIS','AXTI','ONDS'];
-
+ 
 const HOLDINGS = {
   'NBIS': { avgCost: 93,    shares: 177,  type: 'C' },
   'ONDS': { avgCost: 9.45,  shares: 1960, type: 'C' },
   'AXTI': { avgCost: 65.62, shares: 60,   type: 'C' }
 };
-
+ 
 const TECH_LABELS = ['週K均線','週K趨勢強度','週K型態','週K支撐距離','底部蓄力','日K回踩','日K縮量','日K型態','放量確認','量比趨勢','距前高%','高低點結構'];
-
+ 
 // 手填基本面分數（Guidance/法說語氣）
 const MANUAL_FUND = {
   'NVDA': { guidance: 3, tone: 3 },
@@ -781,13 +951,13 @@ const MANUAL_FUND = {
   'AXTI': { guidance: 0, tone: 0 },
   'ONDS': { guidance: 0, tone: 0 }
 };
-
+ 
 // 技術面評分（手動）
 let techScores = JSON.parse(localStorage.getItem('strix_tech') || '{}');
 let fundScores = JSON.parse(localStorage.getItem('strix_fund') || '{}');
 let manualData = JSON.parse(localStorage.getItem('strix_manual') || '{}');
 let priceCache = {};
-
+ 
 // ══════════════════════════════════════════
 // 頁面切換
 // ══════════════════════════════════════════
@@ -797,7 +967,7 @@ function showPage(name) {
   document.getElementById('page-' + name).classList.add('active');
   event.target.classList.add('active');
 }
-
+ 
 // ══════════════════════════════════════════
 // FMP API
 // ══════════════════════════════════════════
@@ -808,7 +978,7 @@ async function fmpQuote(ticker) {
     return d && d.length > 0 ? d[0] : null;
   } catch(e) { return null; }
 }
-
+ 
 async function fmpHistory(ticker, days) {
   try {
     const r = await fetch(`${BASE}/historical-price-eod/light?symbol=${ticker}&limit=${days}&apikey=${FMP_KEY}`);
@@ -816,7 +986,7 @@ async function fmpHistory(ticker, days) {
     return d && d.length > 0 ? d.reverse() : null;
   } catch(e) { return null; }
 }
-
+ 
 // ══════════════════════════════════════════
 // 全部更新
 // ══════════════════════════════════════════
@@ -824,7 +994,7 @@ async function updateAll() {
   const btn = document.getElementById('updateBtn');
   btn.disabled = true;
   btn.textContent = '更新中...';
-
+ 
   try {
     await Promise.all([
       updateMarket(),
@@ -837,11 +1007,11 @@ async function updateAll() {
     document.getElementById('market-time').textContent =
       '更新：' + new Date().toLocaleTimeString('zh-TW');
   } catch(e) { console.error(e); }
-
+ 
   btn.disabled = false;
   btn.textContent = '⟳ 更新';
 }
-
+ 
 // ══════════════════════════════════════════
 // 大盤
 // ══════════════════════════════════════════
@@ -849,7 +1019,7 @@ async function updateMarket() {
   const [qqq, soxx, vix] = await Promise.all([
     fmpQuote('QQQ'), fmpQuote('SOXX'), fmpQuote('VIX')
   ]);
-
+ 
   if (qqq) {
     document.getElementById('qqq-price').textContent = '$' + qqq.price?.toFixed(2);
     priceCache['QQQ'] = qqq.price;
@@ -866,12 +1036,12 @@ async function updateMarket() {
     else if (v < 25) vixTag.textContent = '🟡 正常';
     else if (v < 30) vixTag.textContent = '🟠 偏高';
     else vixTag.textContent = '🔴 恐慌';
-
+ 
     const sigVix = document.getElementById('sig-vix');
     sigVix.textContent = v?.toFixed(2);
     sigVix.className = 'tag ' + (v < 20 ? 'green' : v < 25 ? 'yellow' : v < 30 ? 'orange' : 'red');
   }
-
+ 
   // 連跌天數（手填）
   const qDown = parseInt(document.getElementById('input-qqq-down').value) || 0;
   const sDown = parseInt(document.getElementById('input-soxx-down').value) || 0;
@@ -879,13 +1049,13 @@ async function updateMarket() {
   document.getElementById('soxx-down').textContent = sDown;
   document.getElementById('sig-qqq-down').textContent = qDown + ' 天';
   document.getElementById('sig-soxx-down').textContent = sDown + ' 天';
-
+ 
   // 近高點
   const qHigh = document.getElementById('input-qqq-high').value;
   const sHigh = document.getElementById('input-soxx-high').value;
   document.getElementById('qqq-high').textContent = qHigh || '--';
   document.getElementById('soxx-high').textContent = sHigh || '--';
-
+ 
   // 燈號判斷
   const vixVal = vix?.price || 0;
   let status = 'green', statusText = '🟢 趨勢正常';
@@ -899,34 +1069,34 @@ async function updateMarket() {
   const ms = document.getElementById('market-status');
   ms.textContent = statusText;
   ms.className = 'tag ' + status;
-
+ 
   const action = document.getElementById('sig-action');
   if (status === 'red') { action.textContent = '🔴 防守 只允許超小試單'; action.className = 'tag red'; }
   else if (status === 'orange') { action.textContent = '🟠 縮手 收斂部位'; action.className = 'tag orange'; }
   else if (status === 'yellow') { action.textContent = '🟡 不追價 等回踩'; action.className = 'tag yellow'; }
   else { action.textContent = '🟢 正常操作'; action.className = 'tag green'; }
 }
-
+ 
 // ══════════════════════════════════════════
 // 持倉
 // ══════════════════════════════════════════
 async function updateHoldings() {
   const tickers = Object.keys(HOLDINGS);
   const quotes = await Promise.all(tickers.map(t => fmpQuote(t)));
-
+ 
   quotes.forEach((q, i) => {
     if (q) priceCache[tickers[i]] = q.price;
   });
-
+ 
   renderHoldings(quotes, tickers);
 }
-
+ 
 function renderHoldings(quotes, tickers) {
   const cards = document.getElementById('holdings-cards');
   const tbody = document.getElementById('holdings-body');
   cards.innerHTML = '';
   tbody.innerHTML = '';
-
+ 
   tickers.forEach((ticker, i) => {
     const h = HOLDINGS[ticker];
     const price = (quotes && quotes[i]) ? quotes[i].price : (priceCache[ticker] || h.avgCost);
@@ -938,7 +1108,7 @@ function renderHoldings(quotes, tickers) {
     const distStop = (price - stopLoss) / price * 100;
     const isProfit = pct >= 0;
     const isStop = price < stopLoss;
-
+ 
     // 卡片
     const cardClass = isStop ? 'loss' : pct > 5 ? 'profit' : 'warn';
     cards.innerHTML += `
@@ -961,7 +1131,7 @@ function renderHoldings(quotes, tickers) {
           </span>
         </div>
       </div>`;
-
+ 
     // 表格行
     const action = isStop ? '🔴 考慮停損' : pct > 15 ? '✅ 等目標' : '⚠️ 持續追蹤';
     tbody.innerHTML += `
@@ -980,23 +1150,23 @@ function renderHoldings(quotes, tickers) {
       </tr>`;
   });
 }
-
+ 
 // ══════════════════════════════════════════
 // 盤前篩選
 // ══════════════════════════════════════════
 async function updatePremarket() {
   const tbody = document.getElementById('premarket-body');
   tbody.innerHTML = `<tr><td colspan="7" class="empty"><div class="loading"><div class="dot-pulse"><span></span><span></span><span></span></div> 抓取報價中...</div></td></tr>`;
-
+ 
   const quotes = await Promise.all(WATCHLIST.map(t => fmpQuote(t)));
   tbody.innerHTML = '';
-
+ 
   WATCHLIST.forEach((ticker, i) => {
     const q = quotes[i];
     const prevClose = q?.previousClose || 0;
     const price = q?.price || 0;
     if (q) priceCache[ticker] = price;
-
+ 
     const id = 'pm_' + ticker;
     tbody.innerHTML += `
       <tr>
@@ -1010,52 +1180,52 @@ async function updatePremarket() {
       </tr>`;
   });
 }
-
+ 
 function calcPremarket(ticker) {
   const id = 'pm_' + ticker;
   const preEl = document.getElementById(id + '_pre');
   const volEl = document.getElementById(id + '_vol');
   const prevClose = priceCache[ticker] || 0;
-
+ 
   const pre = parseFloat(preEl?.value) || 0;
   const vol = parseFloat(volEl?.value) || 0;
-
+ 
   if (!pre || !prevClose) return;
-
+ 
   const pct = (pre - prevClose) / prevClose * 100;
   document.getElementById(id + '_pct').textContent = (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%';
   document.getElementById(id + '_pct').style.color = pct >= 0 ? '#22c55e' : '#ef4444';
-
+ 
   let str = '--', exec = '--';
   if (pct >= 2 && vol >= 1.5) { str = '🟢 強勢'; exec = '✅ 可考慮'; }
   else if (pct >= 0) { str = '🟡 一般'; exec = '⚠️ 觀察'; }
   else { str = '🔴 弱勢'; exec = '❌ 跳過'; }
-
+ 
   document.getElementById(id + '_str').innerHTML = str;
   document.getElementById(id + '_exec').innerHTML = exec;
 }
-
+ 
 // ══════════════════════════════════════════
 // 技術面
 // ══════════════════════════════════════════
 function renderTechnical() {
   const container = document.getElementById('tech-cards');
   container.innerHTML = '';
-
+ 
   SCORE_TICKERS.forEach(ticker => {
     const scores = techScores[ticker] || Array(12).fill(0);
     const total = scores.reduce((a,b) => a+b, 0);
     const norm = (total / 24 * 10).toFixed(1);
     const price = priceCache[ticker] || '--';
-
+ 
     let suggestion = '尚未填分', sugClass = 'gray';
     if (norm >= 8) { suggestion = '🟢 可建第一批'; sugClass = 'green'; }
     else if (norm >= 6) { suggestion = '🟡 等待更好時機'; sugClass = 'yellow'; }
     else if (norm >= 4) { suggestion = '🟠 再觀察'; sugClass = 'orange'; }
     else if (total > 0) { suggestion = '🔴 暫不進場'; sugClass = 'red'; }
-
+ 
     const fillColor = norm >= 6 ? '#22c55e' : norm >= 4 ? '#eab308' : '#ef4444';
-
+ 
     container.innerHTML += `
       <div class="card">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
@@ -1071,7 +1241,7 @@ function renderTechnical() {
             </div>
           </div>
         </div>
-
+ 
         <div style="font-size:11px;color:var(--text3);margin-bottom:6px;font-family:var(--mono)">點擊格子切換分數（0→1→2→0）</div>
         <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px" id="tech-${ticker}">
           ${TECH_LABELS.map((label, idx) => `
@@ -1087,21 +1257,21 @@ function renderTechnical() {
       </div>`;
   });
 }
-
+ 
 function cycleScore(ticker, idx) {
   if (!techScores[ticker]) techScores[ticker] = Array(12).fill(0);
   techScores[ticker][idx] = (techScores[ticker][idx] + 1) % 3;
   localStorage.setItem('strix_tech', JSON.stringify(techScores));
   renderTechnical();
 }
-
+ 
 // ══════════════════════════════════════════
 // 基本面
 // ══════════════════════════════════════════
 function renderFundamental() {
   const tbody = document.getElementById('fund-body');
   tbody.innerHTML = '';
-
+ 
   SCORE_TICKERS.forEach(ticker => {
     const f = fundScores[ticker] || {};
     const mf = MANUAL_FUND[ticker] || {};
@@ -1112,13 +1282,13 @@ function renderFundamental() {
     const e12 = f.e12 || 0;
     const sub = guidance + tone + e5 + e6 + e7 + e8 + e9 + e10 + e12;
     const norm = (sub / 21 * 10).toFixed(1);
-
+ 
     let status = '尚未填分', sClass = 'gray';
     if (norm >= 8) { status = '🟢 強力候選'; sClass = 'green'; }
     else if (norm >= 6) { status = '🟡 值得追蹤'; sClass = 'yellow'; }
     else if (norm >= 4) { status = '🟠 需更多確認'; sClass = 'orange'; }
     else if (sub > 0) { status = '🔴 基本面弱'; sClass = 'red'; }
-
+ 
     tbody.innerHTML += `
       <tr>
         <td class="ticker-cell">${ticker}</td>
@@ -1149,41 +1319,41 @@ function renderFundamental() {
       </tr>`;
   });
 }
-
+ 
 function updateFundManual(ticker, field, val) {
   if (!MANUAL_FUND[ticker]) MANUAL_FUND[ticker] = {};
   MANUAL_FUND[ticker][field] = parseInt(val);
   renderFundamental();
 }
-
+ 
 function updateFundScore(ticker, field, val) {
   if (!fundScores[ticker]) fundScores[ticker] = {};
   fundScores[ticker][field] = parseInt(val);
   localStorage.setItem('strix_fund', JSON.stringify(fundScores));
   renderFundamental();
 }
-
+ 
 // ══════════════════════════════════════════
 // 選股池
 // ══════════════════════════════════════════
 function renderWatchlist() {
   const tbody = document.getElementById('watchlist-body');
   tbody.innerHTML = '';
-
+ 
   WATCHLIST.forEach(ticker => {
     const price = priceCache[ticker];
     if (!price) {
       tbody.innerHTML += `<tr><td class="ticker-cell">${ticker}</td><td colspan="10" style="color:var(--text3)">-- 點更新抓取 --</td></tr>`;
       return;
     }
-
+ 
     const techScore = techScores[ticker] ? (techScores[ticker].reduce((a,b)=>a+b,0)/24*10).toFixed(1) : '--';
     const f = fundScores[ticker] || {};
     const mf = MANUAL_FUND[ticker] || {};
     const fundSub = (mf.guidance||0)+(mf.tone||0)+(f.e5||0)+(f.e6||0)+(f.e7||0)+(f.e8||0)+(f.e9||0)+(f.e10||0)+(f.e12||0);
     const fundScore = (fundSub/21*10).toFixed(1);
     const combined = techScore !== '--' ? ((parseFloat(techScore)*0.6 + parseFloat(fundScore)*0.4)).toFixed(1) : '--';
-
+ 
     let suggestion = '尚未評分', sugClass = 'gray';
     if (combined !== '--') {
       const c = parseFloat(combined);
@@ -1192,7 +1362,7 @@ function renderWatchlist() {
       else if (c >= 3) { suggestion = '🟠 等待改善'; sugClass = 'orange'; }
       else { suggestion = '🔴 暫時跳過'; sugClass = 'red'; }
     }
-
+ 
     tbody.innerHTML += `
       <tr>
         <td class="ticker-cell">${ticker}</td>
@@ -1209,7 +1379,7 @@ function renderWatchlist() {
       </tr>`;
   });
 }
-
+ 
 // ══════════════════════════════════════════
 // 手填儲存
 // ══════════════════════════════════════════
@@ -1224,7 +1394,7 @@ function saveManual() {
   };
   localStorage.setItem('strix_manual', JSON.stringify(manualData));
 }
-
+ 
 function loadManual() {
   if (manualData.qqqDown) document.getElementById('input-qqq-down').value = manualData.qqqDown;
   if (manualData.soxxDown) document.getElementById('input-soxx-down').value = manualData.soxxDown;
@@ -1233,7 +1403,7 @@ function loadManual() {
   if (manualData.qqqLow) document.getElementById('input-qqq-low').value = manualData.qqqLow;
   if (manualData.soxxLow) document.getElementById('input-soxx-low').value = manualData.soxxLow;
 }
-
+ 
 // ══════════════════════════════════════════
 // 初始化
 // ══════════════════════════════════════════
@@ -1241,10 +1411,10 @@ function loadManual() {
   loadManual();
   renderTechnical();
   renderFundamental();
-
+ 
   // 初始化持倉（不等API）
   renderHoldings(null, Object.keys(HOLDINGS));
-
+ 
   // 初始化盤前
   const tbody = document.getElementById('premarket-body');
   WATCHLIST.forEach(ticker => {
@@ -1259,21 +1429,129 @@ function loadManual() {
         <td id="pm_${ticker}_exec">--</td>
       </tr>`;
   });
-
+ 
   // 自動更新
   updateAll();
 })();
-
+ 
+// ══════════════════════════════════════════
+// 新聞中心
+// ══════════════════════════════════════════
+let allNews = [];
+let currentFilter = 'all';
+let newsLoaded = false;
+ 
+async function loadNews() {
+  if (document.getElementById('page-news').style.display === 'none') return;
+  
+  const btn = document.getElementById('news-btn');
+  const loading = document.getElementById('news-loading');
+  const container = document.getElementById('news-container');
+  
+  btn.disabled = true;
+  btn.textContent = '整理中...';
+  loading.style.display = 'block';
+  container.innerHTML = '';
+ 
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+        messages: [{
+          role: 'user',
+          content: `Search for today's most important US stock market news. Focus on:
+1. Major market moves (S&P500, Nasdaq, QQQ)
+2. Fed/interest rate news
+3. AI and tech sector news (NVDA, GOOGL, MSFT, META)
+4. Semiconductor news (TSM, MU, ALAB)
+5. News about: NBIS, ONDS, AXTI, RKLB, PLTR, IREN
+ 
+Return ONLY a JSON array (no markdown, no explanation) with 8-10 items:
+[{
+  "title": "headline in Traditional Chinese",
+  "summary": "2-3 sentence summary in Traditional Chinese",
+  "impact": "bullish/bearish/neutral",
+  "impactText": "one sentence impact on stock market in Traditional Chinese",
+  "category": "market/tech/semi/fed/holdings",
+  "tickers": ["NVDA","QQQ"],
+  "time": "today"
+}]`
+        }]
+      })
+    });
+ 
+    const data = await response.json();
+    const text = data.content.map(i => i.text || '').filter(Boolean).join('');
+    const match = text.match(/\[[\s\S]*\]/);
+    
+    if (match) {
+      allNews = JSON.parse(match[0]);
+      renderNews(allNews);
+    } else {
+      throw new Error('無法解析新聞資料');
+    }
+  } catch(e) {
+    container.innerHTML = `<div class="card"><div class="empty">新聞載入失敗，請重試<br><small style="color:var(--text3)">${e.message}</small></div></div>`;
+  }
+ 
+  loading.style.display = 'none';
+  btn.disabled = false;
+  btn.textContent = '⟳ 重新整理';
+  newsLoaded = true;
+}
+ 
+function renderNews(news) {
+  const container = document.getElementById('news-container');
+  if (!news || news.length === 0) {
+    container.innerHTML = '<div class="card"><div class="empty">今日暫無重點新聞</div></div>';
+    return;
+  }
+ 
+  const tagMap = { market:'大盤', tech:'科技/AI', semi:'半導體', fed:'Fed/總經', holdings:'持倉' };
+ 
+  container.innerHTML = news.map(n => `
+    <div class="news-card" data-cat="${n.category}">
+      <div class="news-header">
+        <div class="news-title">${n.title}</div>
+        <span class="news-tag ${n.category}">${tagMap[n.category] || n.category}</span>
+      </div>
+      <div class="news-summary">${n.summary}</div>
+      <div class="news-impact ${n.impact}">
+        ${n.impact === 'bullish' ? '📈 利多' : n.impact === 'bearish' ? '📉 利空' : '➡️ 中性'}：${n.impactText}
+      </div>
+      <div class="news-footer">
+        <div class="news-tickers">
+          ${(n.tickers || []).map(t => `<span class="news-ticker-tag">${t}</span>`).join('')}
+        </div>
+        <span>${n.time || 'today'}</span>
+      </div>
+    </div>
+  `).join('');
+}
+ 
+function filterNews(cat, el) {
+  currentFilter = cat;
+  document.querySelectorAll('.news-cat').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+ 
+  const filtered = cat === 'all' ? allNews : allNews.filter(n => n.category === cat);
+  renderNews(filtered);
+}
+ 
 // ══════════════════════════════════════════
 // 密碼保護
 // ══════════════════════════════════════════
 const PW_HASH = '0942a2760d0547a4d90ebb9a7ddb95b5caf33d07dab0023bc4790cfc6db912e2'; // STRIX2024
-
+ 
 async function hashStr(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
   return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
-
+ 
 async function unlock() {
   const input = document.getElementById('lock-input');
   const err = document.getElementById('lock-err');
@@ -1289,11 +1567,168 @@ async function unlock() {
     setTimeout(() => { input.classList.remove('shake'); err.textContent = ''; }, 800);
   }
 }
-
+ 
 // 已登入則直接顯示
 if (sessionStorage.getItem('strix_auth') === '1') {
   document.getElementById('lock-screen').style.display = 'none';
   document.getElementById('app').style.display = 'block';
+}
+ 
+// ══════════════════════════════════════════
+// 盤前掃描系統
+// ══════════════════════════════════════════
+let pmData = [];
+ 
+async function runPremarketScan() {
+  const btn = document.getElementById('pm-scan-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '掃描中...'; }
+ 
+  document.getElementById('pm-top-grid').innerHTML = '<div class="empty"><div class="loading"><div class="dot-pulse"><span></span><span></span><span></span></div> 正在抓取盤前數據...</div></div>';
+  document.getElementById('pm-result-body').innerHTML = '<tr><td colspan="9" class="empty">載入中...</td></tr>';
+ 
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
+        messages: [{
+          role: 'user',
+          content: `Fetch https://stockanalysis.com/markets/premarket/gainers/ and return the stocks table as JSON array.
+Each item must have: { symbol, name, change, price, volume, mktcap }
+change = number (% change), price = number, volume = number, mktcap = number in millions.
+Return ONLY a valid JSON array, no markdown, no explanation.`
+        }]
+      })
+    });
+ 
+    const data = await response.json();
+    const text = data.content.map(i => i.text || '').filter(Boolean).join('');
+    const match = text.match(/\[[\s\S]*?\]/);
+    if (!match) throw new Error('無法解析數據');
+ 
+    const raw = JSON.parse(match[0]);
+ 
+    const minChg   = parseFloat(document.getElementById('pm-change')?.value) || 2;
+    const minCap   = parseFloat(document.getElementById('pm-mktcap')?.value) || 500;
+    const minPrice = parseFloat(document.getElementById('pm-price-min')?.value) || 5;
+    const maxPrice = parseFloat(document.getElementById('pm-price-max')?.value) || 200;
+ 
+    pmData = raw.filter(s =>
+      s.change >= minChg &&
+      s.mktcap >= minCap &&
+      s.price  >= minPrice &&
+      s.price  <= maxPrice
+    ).sort((a,b) => b.change - a.change);
+ 
+    renderPmTopCards(pmData.slice(0, 3));
+    renderPmTable(pmData.slice(0, 30));
+ 
+    const t = document.getElementById('pm-update-time');
+    if (t) t.textContent = '更新：' + new Date().toLocaleTimeString('zh-TW');
+ 
+  } catch(e) {
+    document.getElementById('pm-top-grid').innerHTML = `<div class="empty">抓取失敗：${e.message}</div>`;
+    document.getElementById('pm-result-body').innerHTML = `<tr><td colspan="9" class="empty">請重試</td></tr>`;
+  }
+ 
+  if (btn) { btn.disabled = false; btn.textContent = '⟳ 重新掃描'; }
+}
+ 
+function getPmVerdict(s) {
+  let score = 0;
+  if (s.change >= 8)      score += 3;
+  else if (s.change >= 5) score += 2;
+  else if (s.change >= 3) score += 1;
+ 
+  if (s.volume >= 1000000)     score += 3;
+  else if (s.volume >= 500000) score += 2;
+  else if (s.volume >= 100000) score += 1;
+ 
+  if (s.mktcap >= 5000)      score += 3;
+  else if (s.mktcap >= 1000) score += 2;
+  else if (s.mktcap >= 500)  score += 1;
+ 
+  if (s.price >= 10 && s.price <= 60) score += 2;
+  else if (s.price >= 5 && s.price <= 100) score += 1;
+ 
+  if (score >= 9)      return { cls: 'green', text: '✅ 強力候選', score };
+  else if (score >= 6) return { cls: 'yellow', text: '👀 值得觀察', score };
+  else                 return { cls: 'gray',   text: '⏭ 條件不足', score };
+}
+ 
+function fmtVol(v) {
+  if (!v) return '--';
+  if (v >= 1e6) return (v/1e6).toFixed(1)+'M';
+  if (v >= 1e3) return (v/1e3).toFixed(0)+'K';
+  return String(v);
+}
+ 
+function fmtCap(m) {
+  if (!m) return '--';
+  if (m >= 1000) return '$'+(m/1000).toFixed(1)+'B';
+  return '$'+m.toFixed(0)+'M';
+}
+ 
+function renderPmTopCards(stocks) {
+  if (!stocks.length) {
+    document.getElementById('pm-top-grid').innerHTML = '<div class="empty">沒有符合條件的標的</div>';
+    return;
+  }
+  document.getElementById('pm-top-grid').innerHTML = stocks.map((s, i) => {
+    const v = getPmVerdict(s);
+    return `
+      <div class="card" style="border-left:3px solid var(--${v.cls})">
+        <div style="font-size:11px;color:var(--text3);font-family:var(--mono);margin-bottom:6px">NO.${i+1} 候選</div>
+        <div style="font-family:var(--mono);font-size:22px;font-weight:700;color:var(--accent2);margin-bottom:4px">${s.symbol}</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.name}</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">
+          <div style="font-size:12px;color:var(--text2)">盤前漲幅<strong style="display:block;font-size:18px;font-family:var(--mono);color:var(--green)">+${s.change.toFixed(2)}%</strong></div>
+          <div style="font-size:12px;color:var(--text2)">盤前價<strong style="display:block;font-size:18px;font-family:var(--mono)">$${s.price.toFixed(2)}</strong></div>
+          <div style="font-size:12px;color:var(--text2)">成交量<strong style="display:block;font-size:14px;font-family:var(--mono);color:var(--text)">${fmtVol(s.volume)}</strong></div>
+          <div style="font-size:12px;color:var(--text2)">市值<strong style="display:block;font-size:14px;font-family:var(--mono);color:var(--text)">${fmtCap(s.mktcap)}</strong></div>
+        </div>
+        <div style="text-align:center;padding:8px;border-radius:6px;background:rgba(${v.cls==='green'?'34,197,94':v.cls==='yellow'?'234,179,8':'71,85,105'},0.15);font-size:12px;font-weight:600;color:var(--${v.cls})">
+          ${v.text} · 評分 ${v.score}/11
+        </div>
+      </div>`;
+  }).join('');
+}
+ 
+function renderPmTable(stocks) {
+  if (!stocks.length) {
+    document.getElementById('pm-result-body').innerHTML = '<tr><td colspan="9" class="empty">沒有符合條件的標的</td></tr>';
+    return;
+  }
+  document.getElementById('pm-result-body').innerHTML = stocks.map((s, i) => {
+    const v = getPmVerdict(s);
+    return `
+      <tr>
+        <td style="color:var(--text3);font-family:var(--mono)">${i+1}</td>
+        <td class="ticker-cell">${s.symbol}</td>
+        <td style="color:var(--text2);font-size:12px;max-width:140px;overflow:hidden;text-overflow:ellipsis">${s.name}</td>
+        <td style="color:var(--green);font-family:var(--mono);font-weight:700">+${s.change.toFixed(2)}%</td>
+        <td style="font-family:var(--mono)">$${s.price.toFixed(2)}</td>
+        <td style="font-family:var(--mono);color:var(--text2)">${fmtVol(s.volume)}</td>
+        <td style="font-family:var(--mono);color:var(--text2)">${fmtCap(s.mktcap)}</td>
+        <td style="font-family:var(--mono);color:var(--text3)">${v.score}/11</td>
+        <td><span class="tag ${v.cls}">${v.text}</span></td>
+      </tr>`;
+  }).join('');
+}
+ 
+// 切換到盤前頁時自動掃描
+const origShowPage = showPage;
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'premarket' && pmData.length === 0) {
+    runPremarketScan();
+  }
 }
 </script>
 </div><!-- /app -->
