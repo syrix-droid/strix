@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
@@ -161,31 +161,32 @@ body::after {
   position: fixed; top: 0; left: 0; right: 0; height: 54px;
   display: flex; align-items: center; padding: 0 20px; gap: 6px;
   z-index: 100;
-  background: rgba(8,12,10,0.92);
+  background: rgba(2,4,7,0.82);
   backdrop-filter: blur(20px);
 }
-/* Nav — 雙色頂線 */
+/* Nav — 白金頂線 */
 .nav::before {
   content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--G) 0%, rgba(8,12,10,0) 40%, rgba(8,12,10,0) 60%, var(--R) 100%);
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent);
 }
-/* Nav — 底部分隔線 */
+/* Nav — 底部極細分隔線 */
 .nav::after {
   content: '';
   position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, var(--G), rgba(255,255,255,0.04), var(--R));
-  opacity: 0.3;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
 }
 .nav-logo {
   display: flex; align-items: center; gap: 10px; margin-right: 12px;
 }
-/* Logo mark — 左綠右紅 K棒縮影 */
+/* Logo mark — 圓形白金框 */
 .nav-mark {
-  width: 26px; height: 26px; border-radius: 6px;
-  background: linear-gradient(90deg, var(--G) 50%, var(--R) 50%);
+  width: 26px; height: 26px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.28);
+  background: rgba(255,255,255,0.04);
   display: flex; align-items: center; justify-content: center;
-  font-family: var(--mono); font-size: 11px; font-weight: 600; color: #fff;
+  font-family: var(--mono); font-size: 11px; font-weight: 600;
+  color: rgba(255,255,255,0.65);
 }
 .nav-text {
   font-family: var(--mono); font-size: 14px; font-weight: 600;
@@ -200,11 +201,11 @@ body::after {
   background: none; font-family: var(--sans);
   transition: all 0.15s;
 }
-.tab:hover { color: var(--text); background: var(--bg3); }
+.tab:hover { color: var(--text); background: rgba(255,255,255,0.04); }
 .tab.on {
-  color: var(--G);
-  background: var(--Gm);
-  border-color: rgba(34,197,94,0.2);
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.12);
 }
 .nav-r { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
 .ntime { font-family: var(--mono); font-size: 11px; color: var(--text2); }
@@ -275,21 +276,24 @@ body::after {
  
 /* ── ETF 卡片 ── */
 .ecard {
-  background: var(--bg2); border-radius: 10px; padding: 14px 16px;
-  border: 1px solid var(--b); cursor: default;
-  transition: all 0.2s; position: relative; overflow: hidden;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-top: 1px solid rgba(255,255,255,0.2);
+  border-radius: 10px; padding: 14px 16px;
+  cursor: default; transition: all 0.2s;
+  position: relative; overflow: hidden;
+  backdrop-filter: blur(10px);
 }
-/* 左邊緣 — 漲綠跌紅 */
 .ecard::before {
-  content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px;
+  content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 2px;
   transition: background 0.4s;
 }
 .ecard.up-bar::before  { background: var(--G); }
 .ecard.dn-bar::before  { background: var(--R); }
-.ecard.neu-bar::before { background: var(--b2); }
-.ecard:hover { transform: translateY(-2px); border-color: var(--b2); }
-.ecard.up-bar:hover { box-shadow: 0 4px 20px rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.2); }
-.ecard.dn-bar:hover { box-shadow: 0 4px 20px rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.2); }
+.ecard.neu-bar::before { background: rgba(255,255,255,0.1); }
+.ecard:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.14); }
+.ecard.up-bar:hover  { box-shadow: 0 4px 24px rgba(34,197,94,0.08); }
+.ecard.dn-bar:hover  { box-shadow: 0 4px 24px rgba(239,68,68,0.08); }
 .e-role { font-size: 9px; color: var(--text3); font-family: var(--mono); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 2px; }
 .e-sym  { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--text2); margin-bottom: 6px; }
 .e-price { font-family: var(--mono); font-size: 20px; font-weight: 500; margin-bottom: 2px; }
@@ -299,13 +303,15 @@ body::after {
  
 /* ── 卡片/面板 ── */
 .panel {
-  background: var(--bg2); border: 1px solid var(--b);
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,255,255,0.18);
   border-radius: 14px; padding: 20px 22px; margin-bottom: 14px;
   position: relative;
+  backdrop-filter: blur(12px);
 }
-/* 左側 K棒色條 */
-.panel-g { border-left: 3px solid rgba(34,197,94,0.4); }
-.panel-r { border-left: 3px solid rgba(239,68,68,0.3); }
+.panel-g { border-left: 2px solid rgba(34,197,94,0.4); }
+.panel-r { border-left: 2px solid rgba(239,68,68,0.3); }
 .ptitle {
   font-size: 9px; font-weight: 600; color: var(--text3);
   letter-spacing: 2px; text-transform: uppercase;
@@ -341,12 +347,12 @@ body::after {
 .adj-wrap { display: flex; align-items: center; gap: 8px; }
 .adj-btn {
   width: 28px; height: 28px; border-radius: 5px;
-  border: 1px solid var(--b2); background: var(--bg3);
+  border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04);
   color: var(--text2); font-size: 15px; cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: all 0.15s;
 }
-.adj-btn:hover { border-color: var(--G); color: var(--G); background: var(--Gm); }
+.adj-btn:hover { border-color: rgba(255,255,255,0.3); color: rgba(255,255,255,0.8); background: rgba(255,255,255,0.06); }
 .adj-num {
   font-family: var(--mono); font-size: 17px; font-weight: 600;
   min-width: 24px; text-align: center;
@@ -385,32 +391,33 @@ body::after {
 /* ── 表格 ── */
 .tbl { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
-thead { background: var(--bg3); }
-th { text-align: left; padding: 10px 14px; font-size: 9px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; white-space: nowrap; font-family: var(--mono); border-bottom: 1px solid var(--b); }
-td { padding: 11px 14px; border-bottom: 1px solid rgba(255,255,255,0.025); white-space: nowrap; }
+thead { background: rgba(255,255,255,0.03); }
+th { text-align: left; padding: 10px 14px; font-size: 9px; color: var(--text3); letter-spacing: 1.5px; text-transform: uppercase; white-space: nowrap; font-family: var(--mono); border-bottom: 1px solid rgba(255,255,255,0.07); }
+td { padding: 11px 14px; border-bottom: 1px solid rgba(255,255,255,0.03); white-space: nowrap; }
 tr:last-child td { border-bottom: none; }
-tr:hover td { background: rgba(34,197,94,0.02); }
+tr:hover td { background: rgba(255,255,255,0.02); }
 .ttk { font-family: var(--mono); font-weight: 600; color: var(--G); font-size: 14px; }
  
 /* ── 載入 ── */
 .loading { display: flex; align-items: center; gap: 8px; color: var(--text2); font-size: 13px; padding: 32px; justify-content: center; }
-.spin { width: 15px; height: 15px; border: 2px solid var(--b2); border-top-color: var(--G); border-radius: 50%; animation: sp 0.7s linear infinite; }
+.spin { width: 15px; height: 15px; border: 1.5px solid rgba(255,255,255,0.08); border-top-color: rgba(255,255,255,0.4); border-radius: 50%; animation: sp 0.7s linear infinite; }
 @keyframes sp { to { transform: rotate(360deg); } }
 .empty { text-align: center; padding: 40px; color: var(--text3); font-size: 12px; font-family: var(--mono); }
  
 /* ── 盤前大卡片 ── */
 .pm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 12px; margin-bottom: 14px; }
 .pmcard {
-  background: var(--bg2); border: 1px solid var(--b);
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.07);
   border-radius: 14px; padding: 18px;
   position: relative; overflow: hidden; transition: all 0.2s;
+  backdrop-filter: blur(12px);
 }
-.pmcard:hover { border-color: rgba(34,197,94,0.2); transform: translateY(-2px); box-shadow: 0 6px 24px rgba(34,197,94,0.06); }
-/* 頂部雙色K棒線 */
-.pmcard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
-.pm1::before { background: linear-gradient(90deg, var(--G) 60%, var(--R) 100%); }
-.pm2::before { background: linear-gradient(90deg, rgba(255,255,255,0.3) 60%, rgba(255,255,255,0.1) 100%); }
-.pm3::before { background: linear-gradient(90deg, rgba(180,140,80,0.6) 60%, rgba(120,80,40,0.4) 100%); }
+.pmcard:hover { border-color: rgba(255,255,255,0.14); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
+.pmcard::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; }
+.pm1::before { background: linear-gradient(90deg, rgba(255,255,255,0.5), rgba(255,255,255,0.1)); }
+.pm2::before { background: linear-gradient(90deg, rgba(255,255,255,0.28), rgba(255,255,255,0.06)); }
+.pm3::before { background: linear-gradient(90deg, rgba(255,255,255,0.15), rgba(255,255,255,0.04)); }
 .pm-rank { font-size: 10px; font-weight: 600; color: var(--text3); font-family: var(--mono); letter-spacing: 1px; margin-bottom: 8px; }
 .pm-sym { font-family: var(--mono); font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 2px; }
 .pm-name { font-size: 11px; color: var(--text2); margin-bottom: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -418,7 +425,7 @@ tr:hover td { background: rgba(34,197,94,0.02); }
 .pm-lbl { font-size: 9px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 2px; font-family: var(--mono); }
 .pm-val { font-family: var(--mono); font-size: 18px; font-weight: 700; }
 .pm-sub { font-family: var(--mono); font-size: 13px; }
-.pm-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.04); }
+.pm-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); }
 .pm-scores { font-size: 12px; color: var(--text2); }
 .pm-final { font-family: var(--mono); font-size: 20px; font-weight: 700; }
  
@@ -426,26 +433,28 @@ tr:hover td { background: rgba(34,197,94,0.02); }
 .banner {
   border-radius: 10px; padding: 13px 18px; margin-bottom: 14px;
   display: flex; align-items: center; gap: 12px;
-  font-size: 14px; font-weight: 600; border: 1px solid;
-  /* K棒感左色條 */
-  border-left-width: 3px;
+  font-size: 14px; font-weight: 600;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-left: 2px solid;
+  backdrop-filter: blur(8px);
 }
-.banner.g { background: var(--Gm); border-color: rgba(34,197,94,0.2); border-left-color: var(--G); color: var(--G); }
-.banner.y { background: rgba(234,179,8,0.06); border-color: rgba(234,179,8,0.2); border-left-color: var(--Y); color: var(--Y); }
-.banner.o { background: rgba(249,115,22,0.06); border-color: rgba(249,115,22,0.2); border-left-color: var(--O); color: var(--O); }
-.banner.r { background: var(--Rm); border-color: rgba(239,68,68,0.2); border-left-color: var(--R); color: var(--R); }
+.banner.g { border-left-color: var(--G); color: var(--G); }
+.banner.y { border-left-color: var(--Y); color: var(--Y); }
+.banner.o { border-left-color: var(--O); color: var(--O); }
+.banner.r { border-left-color: var(--R); color: var(--R); }
  
 /* ── 篩選 ── */
 .filter-bar { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 .f-item { display: flex; align-items: center; gap: 5px; }
 .f-lbl { font-size: 11px; color: var(--text2); font-family: var(--mono); }
 .inp {
-  background: var(--bg3); border: 1px solid var(--b2);
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
   border-radius: 6px; padding: 6px 10px;
   color: var(--text); font-family: var(--mono); font-size: 13px; outline: none;
-  transition: all 0.15s;
+  transition: all 0.15s; backdrop-filter: blur(8px);
 }
-.inp:focus { border-color: rgba(34,197,94,0.4); box-shadow: 0 0 0 2px rgba(34,197,94,0.08); }
+.inp:focus { border-color: rgba(255,255,255,0.28); box-shadow: 0 0 0 2px rgba(255,255,255,0.05); }
  
 /* ── 頁面標題 ── */
 .ph { margin-bottom: 16px; }
@@ -1096,43 +1105,4 @@ function renderTop(arr){
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:4px">
         <div class="pm-sym">${s.symbol}</div>
         <span class="tag ${v.c}">${v.t}</span>
-      </div>
-      <div class="pm-name">${s.name||''}</div>
-      <div class="pm-stats">
-        <div><div class="pm-lbl">盤前漲幅</div><div class="pm-val up">+${c.toFixed(2)}%</div></div>
-        <div><div class="pm-lbl">現價</div><div class="pm-val">$${p.toFixed(2)}</div></div>
-        <div><div class="pm-lbl">成交量</div><div class="pm-sub">${fV(s.volume)}</div></div>
-        <div><div class="pm-lbl">市值</div><div class="pm-sub">${fC(s.marketCap)}</div></div>
-      </div>
-      <div class="pm-foot">
-        <div class="pm-scores">基本 <b style="font-family:var(--mono)">${s.base}/11</b> · ${mbTxt}</div>
-        <div class="pm-final" style="color:${fC2}">${s.final}</div>
-      </div>
-    </div>`;
-  }).join('');
-}
- 
-function renderTbl(arr){
-  if(!arr.length){document.getElementById('pm-body').innerHTML='<tr><td colspan="11" class="empty">無符合條件的標的</td></tr>';return;}
-  document.getElementById('pm-body').innerHTML=arr.map((s,i)=>{
-    const v=verd(s.final),c=s.changesPercentage||0;
-    const fC2=s.final>=10?'var(--G)':s.final>=7?'var(--Y)':s.final>=4?'var(--O)':'var(--R)';
-    const mbTxt=s.mb>0?`<span style="color:var(--G)">+${s.mb}</span>`:s.mb<0?`<span style="color:var(--R)">${s.mb}</span>`:`<span style="color:var(--text3)">0</span>`;
-    return`<tr>
-      <td style="color:var(--text3);font-family:var(--mono);font-size:12px">${i+1}</td>
-      <td class="ttk">${s.symbol}</td>
-      <td style="color:var(--text2);font-size:12px;max-width:140px;overflow:hidden;text-overflow:ellipsis">${s.name||''}</td>
-      <td style="color:var(--G);font-family:var(--mono);font-weight:700">+${c.toFixed(2)}%</td>
-      <td style="font-family:var(--mono)">$${(s.price||0).toFixed(2)}</td>
-      <td style="font-family:var(--mono);color:var(--text2)">${fV(s.volume)}</td>
-      <td style="font-family:var(--mono);color:var(--text2)">${fC(s.marketCap)}</td>
-      <td style="font-family:var(--mono);color:var(--text2)">${s.base}/11</td>
-      <td>${mbTxt}</td>
-      <td style="font-family:var(--mono);font-weight:700;color:${fC2}">${s.final}</td>
-      <td><span class="tag ${v.c}">${v.t}</span></td>
-    </tr>`;
-  }).join('');
-}
-</script>
-</body>
-</html>
+      
