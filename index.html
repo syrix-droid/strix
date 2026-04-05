@@ -38,14 +38,15 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .ntime{font-family:var(--mono);font-size:11px;color:var(--text2);}
 .nupd{font-family:var(--mono);font-size:9px;color:var(--text3);}
 
-.main{padding-top:68px;padding-bottom:40px;max-width:1200px;margin:0 auto;padding-left:16px;padding-right:16px;}
+.main{padding-top:68px;padding-bottom:40px;max-width:1280px;margin:0 auto;padding-left:16px;padding-right:16px;}
 .pg{display:none;}.pg.on{display:block;}
 .card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:14px;}
 .ctitle{font-size:10px;font-weight:500;color:var(--text2);letter-spacing:1.5px;text-transform:uppercase;font-family:var(--mono);margin-bottom:14px;}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
-@media(max-width:700px){.g2{grid-template-columns:1fr;}.g4{grid-template-columns:1fr 1fr;}}
-@media(max-width:400px){.g4{grid-template-columns:1fr;}}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+.g6{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;}
+@media(max-width:900px){.g6{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:600px){.g2,.g3{grid-template-columns:1fr;}.g6{grid-template-columns:repeat(2,1fr);}}
 
 .tag{display:inline-flex;align-items:center;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:500;font-family:var(--mono);}
 .tg{background:rgba(0,230,118,0.12);color:var(--green);}
@@ -72,34 +73,37 @@ tr:hover td{background:rgba(0,212,255,0.02);}
 @keyframes sp{to{transform:rotate(360deg);}}
 .empty{text-align:center;padding:40px;color:var(--text3);font-size:13px;font-family:var(--mono);}
 
-/* 大盤指數卡片 */
-.mcard{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
-.ml{font-size:11px;color:var(--text2);font-family:var(--mono);letter-spacing:1px;margin-bottom:6px;}
-.mv{font-size:28px;font-family:var(--mono);font-weight:500;margin-bottom:3px;}
-.mc{font-size:12px;font-family:var(--mono);}
-.mex{font-size:10px;color:var(--text3);margin-top:2px;font-family:var(--mono);}
+/* ETF 卡片 */
+.ecard{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 16px;transition:border-color 0.2s;}
+.ecard:hover{border-color:var(--border);}
+.el{font-size:10px;color:var(--text3);font-family:var(--mono);letter-spacing:0.8px;margin-bottom:2px;}
+.esym{font-size:12px;font-weight:600;color:var(--text2);font-family:var(--mono);margin-bottom:5px;}
+.ev{font-size:22px;font-family:var(--mono);font-weight:500;margin-bottom:3px;}
+.ec{font-size:12px;font-family:var(--mono);}
+.ex{font-size:10px;color:var(--text3);margin-top:2px;font-family:var(--mono);}
 .up{color:var(--green);}.dn{color:var(--red);}
 
-/* 信心指數儀表 */
-.confidence-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:14px;text-align:center;}
-.conf-label{font-size:11px;color:var(--text2);font-family:var(--mono);letter-spacing:2px;margin-bottom:12px;}
-.conf-score{font-size:72px;font-family:var(--mono);font-weight:600;line-height:1;margin-bottom:8px;}
-.conf-bar-wrap{background:var(--bg3);border-radius:8px;height:12px;margin:0 auto 12px;max-width:300px;overflow:hidden;}
-.conf-bar{height:100%;border-radius:8px;transition:width 0.8s ease;}
-.conf-status{font-size:18px;font-weight:700;margin-bottom:4px;}
+/* 信心儀表 */
+.conf-wrap{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:14px;text-align:center;}
+.conf-lbl{font-size:10px;color:var(--text2);font-family:var(--mono);letter-spacing:2px;margin-bottom:10px;}
+.conf-num{font-size:68px;font-family:var(--mono);font-weight:600;line-height:1;margin-bottom:8px;}
+.conf-bar-bg{background:var(--bg3);border-radius:8px;height:10px;margin:0 auto 12px;max-width:280px;overflow:hidden;}
+.conf-bar{height:100%;border-radius:8px;transition:width 0.8s ease,background 0.5s;}
+.conf-status{font-size:20px;font-weight:700;margin-bottom:4px;}
 .conf-advice{font-size:13px;color:var(--text2);}
 
 /* 指標列 */
-.metric-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid rgba(26,37,64,0.5);}
-.metric-row:last-child{border-bottom:none;}
-.metric-label{font-size:14px;color:var(--text2);display:flex;align-items:center;gap:8px;}
-.metric-icon{width:6px;height:6px;border-radius:50%;background:var(--text3);}
-.metric-icon.good{background:var(--green);}
-.metric-icon.warn{background:var(--yellow);}
-.metric-icon.bad{background:var(--red);}
+.mrow{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid rgba(26,37,64,0.4);}
+.mrow:last-child{border-bottom:none;}
+.mlbl{font-size:13px;color:var(--text2);display:flex;align-items:center;gap:8px;}
+.mdot{width:7px;height:7px;border-radius:50%;background:var(--text3);flex-shrink:0;}
+.mdot.g{background:var(--green);}
+.mdot.y{background:var(--yellow);}
+.mdot.r{background:var(--red);}
+.mauto{font-size:9px;color:var(--text3);font-family:var(--mono);margin-left:4px;}
 
-/* +/- 按鈕 */
-.adj-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:15px;cursor:pointer;transition:all 0.15s;}
+/* +/- */
+.adj-btn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border);background:var(--bg3);color:var(--text);font-size:15px;cursor:pointer;transition:all 0.15s;display:flex;align-items:center;justify-content:center;}
 .adj-btn:hover{border-color:var(--accent);color:var(--accent);}
 .adj-val{font-family:var(--mono);font-size:17px;font-weight:600;min-width:28px;text-align:center;}
 
@@ -111,12 +115,11 @@ tr:hover td{background:rgba(0,212,255,0.02);}
 .pm2::before{background:linear-gradient(90deg,#c0c0c0,#888);}
 .pm3::before{background:linear-gradient(90deg,#cd7f32,#8b4513);}
 
-/* 大盤警示橫幅 */
-.alert-banner{border-radius:10px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:600;}
-.alert-banner.red{background:rgba(255,68,68,0.1);border:1px solid rgba(255,68,68,0.3);color:var(--red);}
-.alert-banner.orange{background:rgba(255,149,0,0.1);border:1px solid rgba(255,149,0,0.3);color:var(--orange);}
-.alert-banner.yellow{background:rgba(255,215,64,0.1);border:1px solid rgba(255,215,64,0.3);color:var(--yellow);}
-.alert-banner.green{background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.2);color:var(--green);}
+.alert{border-radius:10px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:600;}
+.alert.g{background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.25);color:var(--green);}
+.alert.y{background:rgba(255,215,64,0.08);border:1px solid rgba(255,215,64,0.25);color:var(--yellow);}
+.alert.o{background:rgba(255,149,0,0.08);border:1px solid rgba(255,149,0,0.25);color:var(--orange);}
+.alert.r{background:rgba(255,68,68,0.08);border:1px solid rgba(255,68,68,0.25);color:var(--red);}
 
 .inp{background:var(--bg3);border:1px solid var(--border);border-radius:5px;padding:6px 10px;color:var(--text);font-family:var(--mono);font-size:13px;outline:none;}
 .inp:focus{border-color:var(--accent);}
@@ -149,43 +152,61 @@ tr:hover td{background:rgba(0,212,255,0.02);}
 
 <div class="main">
 
-<!-- 大盤頁 -->
+<!-- ══ 大盤頁 ══ -->
 <div class="pg on" id="pg-market">
 
-  <!-- 操作信心指數 -->
-  <div class="confidence-wrap">
-    <div class="conf-label">今日操作信心指數</div>
-    <div class="conf-score" id="conf-score" style="color:var(--text3)">--</div>
-    <div class="conf-bar-wrap"><div class="conf-bar" id="conf-bar" style="width:0%;background:var(--text3)"></div></div>
+  <!-- 信心指數 -->
+  <div class="conf-wrap">
+    <div class="conf-lbl">今日操作信心指數</div>
+    <div class="conf-num" id="conf-num" style="color:var(--text3)">--</div>
+    <div class="conf-bar-bg"><div class="conf-bar" id="conf-bar" style="width:0%"></div></div>
     <div class="conf-status" id="conf-status">載入中...</div>
-    <div class="conf-advice" id="conf-advice">正在抓取市場數據</div>
+    <div class="conf-advice" id="conf-advice">正在抓取市場數據，請稍候</div>
   </div>
 
-  <!-- 四個指數 -->
-  <div class="g4" style="margin-bottom:14px">
-    <div class="mcard">
-      <div class="ml">QQQ</div>
-      <div class="mv" id="m-qqq">--</div>
-      <div class="mc" id="m-qqq-c">--</div>
-      <div class="mex" id="m-qqq-ex">--</div>
+  <!-- 6個ETF -->
+  <div class="g6" style="margin-bottom:14px">
+    <div class="ecard">
+      <div class="el">科技成長</div>
+      <div class="esym">QQQ</div>
+      <div class="ev" id="e-qqq">--</div>
+      <div class="ec" id="ec-qqq">--</div>
+      <div class="ex" id="ex-qqq">--</div>
     </div>
-    <div class="mcard">
-      <div class="ml">SOXX</div>
-      <div class="mv" id="m-soxx">--</div>
-      <div class="mc" id="m-soxx-c">--</div>
-      <div class="mex" id="m-soxx-ex">--</div>
+    <div class="ecard">
+      <div class="el">半導體</div>
+      <div class="esym">SOXX</div>
+      <div class="ev" id="e-soxx">--</div>
+      <div class="ec" id="ec-soxx">--</div>
+      <div class="ex" id="ex-soxx">--</div>
     </div>
-    <div class="mcard">
-      <div class="ml">SPY</div>
-      <div class="mv" id="m-spy">--</div>
-      <div class="mc" id="m-spy-c">--</div>
-      <div class="mex" id="m-spy-ex">--</div>
+    <div class="ecard">
+      <div class="el">半導體先行</div>
+      <div class="esym">SMH</div>
+      <div class="ev" id="e-smh">--</div>
+      <div class="ec" id="ec-smh">--</div>
+      <div class="ex" id="ex-smh">--</div>
     </div>
-    <div class="mcard">
-      <div class="ml">VIX</div>
-      <div class="mv" id="m-vix">--</div>
-      <div class="mc" id="m-vix-c">--</div>
-      <div class="mex" id="m-vix-ex">--</div>
+    <div class="ecard">
+      <div class="el">大盤整體</div>
+      <div class="esym">SPY</div>
+      <div class="ev" id="e-spy">--</div>
+      <div class="ec" id="ec-spy">--</div>
+      <div class="ex" id="ex-spy">--</div>
+    </div>
+    <div class="ecard">
+      <div class="el">小型股/風險</div>
+      <div class="esym">IWM</div>
+      <div class="ev" id="e-iwm">--</div>
+      <div class="ec" id="ec-iwm">--</div>
+      <div class="ex" id="ex-iwm">--</div>
+    </div>
+    <div class="ecard">
+      <div class="el">恐慌指數</div>
+      <div class="esym">VIX</div>
+      <div class="ev" id="e-vix">--</div>
+      <div class="ec" id="ec-vix">--</div>
+      <div class="ex" id="ex-vix">--</div>
     </div>
   </div>
 
@@ -193,62 +214,75 @@ tr:hover td{background:rgba(0,212,255,0.02);}
     <!-- 指標詳情 -->
     <div class="card">
       <div class="ctitle">指標詳情</div>
-      <div class="metric-row">
-        <span class="metric-label"><span class="metric-icon" id="i-qqq-dot"></span>QQQ 連跌天數</span>
+
+      <div class="mrow">
+        <span class="mlbl"><span class="mdot" id="d-qd"></span>QQQ 連跌天數<span class="mauto">自動</span></span>
         <div style="display:flex;align-items:center;gap:8px">
           <button class="adj-btn" onclick="adj('qd',-1)">−</button>
           <span class="adj-val" id="v-qd">0</span>
           <button class="adj-btn" onclick="adj('qd',1)">+</button>
         </div>
       </div>
-      <div class="metric-row">
-        <span class="metric-label"><span class="metric-icon" id="i-soxx-dot"></span>SOXX 連跌天數</span>
+      <div class="mrow">
+        <span class="mlbl"><span class="mdot" id="d-qstop"></span>QQQ 止跌天數<span class="mauto">自動</span></span>
+        <span style="font-family:var(--mono);font-size:14px" id="v-qstop">--</span>
+      </div>
+      <div class="mrow">
+        <span class="mlbl"><span class="mdot" id="d-sd"></span>SOXX 連跌天數<span class="mauto">自動</span></span>
         <div style="display:flex;align-items:center;gap:8px">
           <button class="adj-btn" onclick="adj('sd',-1)">−</button>
           <span class="adj-val" id="v-sd">0</span>
           <button class="adj-btn" onclick="adj('sd',1)">+</button>
         </div>
       </div>
-      <div class="metric-row">
-        <span class="metric-label"><span class="metric-icon" id="i-stop-dot"></span>QQQ 止跌天數</span>
-        <span style="font-family:var(--mono);font-size:15px" id="v-stop">--</span>
+      <div class="mrow">
+        <span class="mlbl"><span class="mdot" id="d-sstop"></span>SOXX 止跌天數<span class="mauto">自動</span></span>
+        <span style="font-family:var(--mono);font-size:14px" id="v-sstop">--</span>
       </div>
-      <div class="metric-row">
-        <span class="metric-label"><span class="metric-icon" id="i-drop-dot"></span>QQQ 距近期高點</span>
-        <span style="font-family:var(--mono);font-size:15px" id="v-drop">--</span>
+      <div class="mrow">
+        <span class="mlbl"><span class="mdot" id="d-smh"></span>SMH 今日漲跌<span class="mauto">自動</span></span>
+        <span style="font-family:var(--mono);font-size:14px" id="v-smh">--</span>
       </div>
-      <div class="metric-row">
-        <span class="metric-label"><span class="metric-icon" id="i-vix-dot"></span>VIX 恐慌指數</span>
+      <div class="mrow">
+        <span class="mlbl"><span class="mdot" id="d-iwm"></span>IWM 風險情緒<span class="mauto">自動</span></span>
+        <span style="font-family:var(--mono);font-size:14px" id="v-iwm">--</span>
+      </div>
+      <div class="mrow">
+        <span class="mlbl"><span class="mdot" id="d-drop"></span>QQQ 距近期高點<span class="mauto">自動</span></span>
+        <span style="font-family:var(--mono);font-size:14px" id="v-drop">--</span>
+      </div>
+      <div class="mrow">
+        <span class="mlbl"><span class="mdot" id="d-vix"></span>VIX 恐慌指數<span class="mauto">自動</span></span>
         <span class="tag tg2" id="v-vix">--</span>
       </div>
     </div>
 
     <!-- 操作指引 -->
     <div class="card">
-      <div class="ctitle">操作指引</div>
+      <div class="ctitle">今日操作指引</div>
       <div id="guidance-list" style="display:flex;flex-direction:column;gap:8px">
-        <div class="empty" style="padding:20px">載入中...</div>
+        <div class="loading" style="padding:20px"><div class="spin"></div></div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 盤前頁 -->
+<!-- ══ 盤前頁 ══ -->
 <div class="pg" id="pg-premarket">
 
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
     <div>
       <div style="font-size:20px;font-weight:700">盤前篩選</div>
-      <div style="font-size:12px;color:var(--text2);margin-top:2px">FMP 即時強勢股 · 大盤連動評分</div>
+      <div style="font-size:12px;color:var(--text2);margin-top:2px">FMP 即時強勢股 · 大盤信心連動評分</div>
     </div>
     <div style="display:flex;gap:10px;align-items:center">
-      <div id="pm-market-tag"></div>
+      <span id="pm-conf-tag"></span>
       <button class="btn btn-p" id="pm-btn" onclick="scanPM()">⟳ 重新掃描</button>
     </div>
   </div>
 
-  <!-- 大盤警示 -->
-  <div id="pm-alert" style="display:none"></div>
+  <!-- 大盤警示橫幅 -->
+  <div id="pm-alert"></div>
 
   <!-- 篩選條件 -->
   <div class="card" style="padding:12px 18px;margin-bottom:14px">
@@ -272,7 +306,7 @@ tr:hover td{background:rgba(0,212,255,0.02);}
     </div>
   </div>
 
-  <!-- 前三名 -->
+  <!-- 前三名大卡片 -->
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin-bottom:14px" id="pm-top">
     <div class="empty">點「重新掃描」獲取今日數據</div>
   </div>
@@ -285,7 +319,7 @@ tr:hover td{background:rgba(0,212,255,0.02);}
           <tr>
             <th>#</th><th>Ticker</th><th>公司</th>
             <th>漲幅%</th><th>現價</th><th>成交量</th><th>市值</th>
-            <th>基本分</th><th>大盤加權</th><th>最終評分</th><th>判斷</th>
+            <th>基本分/11</th><th>大盤加權</th><th>最終分</th><th>判斷</th>
           </tr>
         </thead>
         <tbody id="pm-body">
@@ -303,15 +337,7 @@ const FMP  = 'IoPRCJ0d907kdhMBwWmgH8on0loCOGBA';
 const BASE = 'https://financialmodelingprep.com/stable';
 const PW_H = '0942a2760d0547a4d90ebb9a7ddb95b5caf33d07dab0023bc4790cfc6db912e2';
 
-// 市場狀態
-let mkt = {
-  qd:0, sd:0,        // 連跌天數
-  stopDays:0,        // QQQ 止跌天數（連漲）
-  dropPct:0,         // 距近期高點%
-  vix:0,             // VIX
-  conf:0,            // 信心指數 0-100
-  level:'loading'    // green/yellow/orange/red
-};
+let mkt = { qd:0,sd:0,qStop:0,sStop:0,smhChg:0,iwmChg:0,drop:0,vix:0,conf:50,level:'y' };
 
 // ── 密碼 ──
 async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
@@ -322,10 +348,10 @@ async function unlock(){
     document.getElementById('app').style.display='block';
     sessionStorage.setItem('sa','1');
     init();
-  } else {
+  }else{
     const i=document.getElementById('lpw');
     document.getElementById('lerr').textContent='密碼錯誤';
-    i.classList.add('err'); i.value='';
+    i.classList.add('err');i.value='';
     setTimeout(()=>{i.classList.remove('err');document.getElementById('lerr').textContent='';},700);
   }
 }
@@ -351,285 +377,272 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function fV(v){if(!v||v===0)return '--';if(v>=1e6)return(v/1e6).toFixed(1)+'M';if(v>=1e3)return(v/1e3).toFixed(0)+'K';return v;}
 function fC(m){if(!m||m===0)return '--';if(m>=1e9)return'$'+(m/1e9).toFixed(1)+'B';if(m>=1e6)return'$'+(m/1e6).toFixed(0)+'M';return'$'+m;}
 
+function setETF(id,q){
+  if(!q)return;
+  const c=q.changesPercentage||0;
+  document.getElementById('e-'+id).textContent='$'+(q.price?.toFixed(2)||'--');
+  const ec=document.getElementById('ec-'+id);
+  ec.textContent=(c>=0?'+':'')+c.toFixed(2)+'%';
+  ec.className='ec '+(id==='vix'?(c>=0?'dn':'up'):(c>=0?'up':'dn'));
+}
+
+function calcDownUp(cl){
+  let dn=0,up=0;
+  for(let i=cl.length-1;i>0;i--){if(cl[i]<cl[i-1])dn++;else break;}
+  for(let i=cl.length-1;i>0;i--){if(cl[i]>cl[i-1])up++;else break;}
+  return{dn,up};
+}
+
 // ── 初始化 ──
 async function init(){
   setInterval(()=>document.getElementById('ntime').textContent=new Date().toLocaleTimeString('zh-TW'),1000);
   await loadMarket();
   scanPM();
-  setInterval(loadMarket, 5*60*1000);
-  setInterval(scanPM, 10*60*1000);
+  setInterval(loadMarket,5*60*1000);
+  setInterval(scanPM,10*60*1000);
 }
 
 // ── 大盤 ──
 async function loadMarket(){
-  // QQQ SOXX SPY
-  for(const[sym,id] of [['QQQ','qqq'],['SOXX','soxx'],['SPY','spy']]){
-    const q=await fmpQ(sym);
-    if(!q)continue;
-    const c=q.changesPercentage||0;
-    document.getElementById('m-'+id).textContent='$'+(q.price?.toFixed(2)||'--');
-    const el=document.getElementById('m-'+id+'-c');
-    el.textContent=(c>=0?'+':'')+c.toFixed(2)+'%';
-    el.className='mc '+(c>=0?'up':'dn');
-  }
+  // 6個ETF 並行抓
+  const [qqq,soxx,smh,spy,iwm,vix]=await Promise.all([
+    fmpQ('QQQ'),fmpQ('SOXX'),fmpQ('SMH'),fmpQ('SPY'),fmpQ('IWM'),fmpQ('VIX')
+  ]);
 
-  // VIX
-  const vix=await fmpQ('VIX');
+  setETF('qqq',qqq); setETF('soxx',soxx); setETF('smh',smh);
+  setETF('spy',spy); setETF('iwm',iwm); setETF('vix',vix);
+
+  if(smh) mkt.smhChg=smh.changesPercentage||0;
+  if(iwm) mkt.iwmChg=iwm.changesPercentage||0;
+  if(vix) mkt.vix=vix.price||0;
+
+  // VIX 說明
   if(vix){
-    mkt.vix=vix.price||0;
-    document.getElementById('m-vix').textContent=mkt.vix.toFixed(2);
-    const el=document.getElementById('m-vix-c');
-    const c=vix.changesPercentage||0;
-    el.textContent=(c>=0?'+':'')+c.toFixed(2)+'%';
-    el.className='mc '+(c>=0?'dn':'up'); // VIX漲是壞事
-    const ex=document.getElementById('m-vix-ex');
-    if(mkt.vix<15)ex.textContent='極低波動';
-    else if(mkt.vix<20)ex.textContent='低波動';
-    else if(mkt.vix<25)ex.textContent='正常偏高';
-    else if(mkt.vix<30)ex.textContent='恐慌偏高';
-    else ex.textContent='極度恐慌';
+    const v=mkt.vix;
+    const ex=document.getElementById('ex-vix');
+    if(v<15)ex.textContent='極低波動 有利';
+    else if(v<20)ex.textContent='低波動 正常';
+    else if(v<25)ex.textContent='偏高 注意';
+    else if(v<30)ex.textContent='恐慌 謹慎';
+    else ex.textContent='極度恐慌 觀望';
   }
 
-  // QQQ 歷史分析
-  const qH=await fmpH('QQQ',20);
+  // QQQ 歷史 - 連跌/止跌/距高點
+  const qH=await fmpH('QQQ',15);
   if(qH){
     const cl=qH.map(d=>d.price||d.close);
-
-    // 連跌天數
-    let dn=0;
-    for(let i=cl.length-1;i>0;i--){if(cl[i]<cl[i-1])dn++;else break;}
-    mkt.qd=dn;
+    const{dn,up}=calcDownUp(cl);
+    mkt.qd=dn; mkt.qStop=up;
     document.getElementById('v-qd').textContent=dn;
-
-    // 止跌天數（連漲）
-    let up=0;
-    for(let i=cl.length-1;i>0;i--){if(cl[i]>cl[i-1])up++;else break;}
-    mkt.stopDays=up;
-    document.getElementById('v-stop').textContent=up===0?'尚未止跌':up+'天';
-
-    // 距近期高點（近10天最高）
-    const recent10=cl.slice(-10);
-    const peak=Math.max(...recent10);
-    const cur=cl[cl.length-1];
-    const drop=((cur-peak)/peak*100);
-    mkt.dropPct=drop;
-    document.getElementById('v-drop').textContent=drop.toFixed(1)+'%';
-    document.getElementById('m-qqq-ex').textContent='距近期高點 '+drop.toFixed(1)+'%';
+    document.getElementById('v-qstop').textContent=up===0?'尚未止跌':up+'天';
+    // 距近期高點（近10天）
+    const peak=Math.max(...cl.slice(-10));
+    mkt.drop=((cl[cl.length-1]-peak)/peak*100);
+    document.getElementById('v-drop').textContent=mkt.drop.toFixed(1)+'%';
+    document.getElementById('ex-qqq').textContent='距近期高點 '+mkt.drop.toFixed(1)+'%';
   }
 
-  // SOXX 連跌
+  // SOXX 歷史 - 連跌/止跌
   const sH=await fmpH('SOXX',12);
   if(sH){
     const cl=sH.map(d=>d.price||d.close);
-    let dn=0;
-    for(let i=cl.length-1;i>0;i--){if(cl[i]<cl[i-1])dn++;else break;}
-    mkt.sd=dn;
+    const{dn,up}=calcDownUp(cl);
+    mkt.sd=dn; mkt.sStop=up;
     document.getElementById('v-sd').textContent=dn;
-    document.getElementById('m-soxx-ex').textContent='連跌 '+dn+'天';
+    document.getElementById('v-sstop').textContent=up===0?'尚未止跌':up+'天';
+    document.getElementById('ex-soxx').textContent='連跌'+dn+'天 / 止跌'+up+'天';
   }
 
-  calcConfidence();
+  // SMH IWM ex
+  if(smh){const c=smh.changesPercentage||0;document.getElementById('ex-smh').textContent=c>=0?'半導體強勢':'半導體偏弱';}
+  if(iwm){const c=iwm.changesPercentage||0;document.getElementById('ex-iwm').textContent=c>=1?'風險偏好強':c>=-1?'風險中性':'風險迴避';}
+  if(soxx){const c=soxx.changesPercentage||0;document.getElementById('ex-soxx').textContent=(c>=0?'今日+':'今日')+c.toFixed(2)+'%';}
+
+  // SMH IWM 指標文字
+  document.getElementById('v-smh').textContent=(mkt.smhChg>=0?'+':'')+mkt.smhChg.toFixed(2)+'%';
+  document.getElementById('v-smh').style.color=mkt.smhChg>=0?'var(--green)':'var(--red)';
+  document.getElementById('v-iwm').textContent=(mkt.iwmChg>=0?'+':'')+mkt.iwmChg.toFixed(2)+'%';
+  document.getElementById('v-iwm').style.color=mkt.iwmChg>=0?'var(--green)':'var(--red)';
+
+  calcConf();
   document.getElementById('nupd').textContent='更新 '+new Date().toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'});
 }
 
 function adj(key,delta){
   if(key==='qd'){mkt.qd=Math.max(0,mkt.qd+delta);document.getElementById('v-qd').textContent=mkt.qd;}
   if(key==='sd'){mkt.sd=Math.max(0,mkt.sd+delta);document.getElementById('v-sd').textContent=mkt.sd;}
-  calcConfidence();
+  calcConf();
 }
 
-// ── 信心指數計算 ──
-function calcConfidence(){
-  let score=100; // 從100分開始扣分
+// ── 信心指數 ──
+function calcConf(){
+  let score=100;
   const rules=[];
 
-  // 1. QQQ 連跌（最重要）
-  if(mkt.qd>=4){score-=40;rules.push({bad:true,text:'QQQ連跌'+mkt.qd+'天 ⚠️ 嚴重警示'});}
-  else if(mkt.qd===3){score-=30;rules.push({bad:true,text:'QQQ連跌3天 · 謹慎'});}
-  else if(mkt.qd===2){score-=20;rules.push({bad:true,text:'QQQ連跌2天 · 注意'});}
-  else if(mkt.qd===1){score-=10;rules.push({warn:true,text:'QQQ連跌1天 · 留意方向'});}
-  else if(mkt.stopDays>=2){score+=5;rules.push({good:true,text:'QQQ連漲'+mkt.stopDays+'天 · 趨勢恢復'});}
-  else{rules.push({good:true,text:'QQQ無連跌 · 正常'});}
+  // 1. QQQ 連跌（最重要，最多扣45）
+  if(mkt.qd>=4){score-=45;rules.push({s:'r',t:'QQQ連跌'+mkt.qd+'天 ⚠️ 嚴重警示'});}
+  else if(mkt.qd===3){score-=30;rules.push({s:'r',t:'QQQ連跌3天 · 高風險'});}
+  else if(mkt.qd===2){score-=18;rules.push({s:'r',t:'QQQ連跌2天 · 注意'});}
+  else if(mkt.qd===1){score-=8;rules.push({s:'y',t:'QQQ連跌1天 · 留意方向'});}
+  else if(mkt.qStop>=3){score+=8;rules.push({s:'g',t:'QQQ連漲'+mkt.qStop+'天 · 趨勢強勁'});}
+  else if(mkt.qStop>=1){score+=4;rules.push({s:'g',t:'QQQ止跌反彈'+mkt.qStop+'天'});}
+  else{rules.push({s:'g',t:'QQQ正常 · 無連跌'});}
 
-  // 2. SOXX 連跌（半導體先行）
-  if(mkt.sd>=3){score-=20;rules.push({bad:true,text:'SOXX連跌'+mkt.sd+'天 · 半導體弱'});}
-  else if(mkt.sd===2){score-=12;rules.push({warn:true,text:'SOXX連跌2天 · 注意'});}
-  else if(mkt.sd===1){score-=5;rules.push({warn:true,text:'SOXX連跌1天'});}
-  else{rules.push({good:true,text:'SOXX無連跌 · 正常'});}
+  // 2. SOXX 連跌（半導體先行，最多扣25）
+  if(mkt.sd>=3){score-=25;rules.push({s:'r',t:'SOXX連跌'+mkt.sd+'天 · 半導體嚴重弱勢'});}
+  else if(mkt.sd===2){score-=15;rules.push({s:'r',t:'SOXX連跌2天 · 半導體偏弱'});}
+  else if(mkt.sd===1){score-=6;rules.push({s:'y',t:'SOXX連跌1天 · 半導體注意'});}
+  else if(mkt.sStop>=2){score+=5;rules.push({s:'g',t:'SOXX止跌回升'+mkt.sStop+'天'});}
+  else{rules.push({s:'g',t:'SOXX正常 · 無連跌'});}
 
-  // 3. VIX
-  if(mkt.vix>=30){score-=25;rules.push({bad:true,text:'VIX '+mkt.vix.toFixed(1)+' · 市場極度恐慌'});}
-  else if(mkt.vix>=25){score-=15;rules.push({bad:true,text:'VIX '+mkt.vix.toFixed(1)+' · 市場恐慌'});}
-  else if(mkt.vix>=20){score-=8;rules.push({warn:true,text:'VIX '+mkt.vix.toFixed(1)+' · 波動偏高'});}
-  else if(mkt.vix>=15){rules.push({good:true,text:'VIX '+mkt.vix.toFixed(1)+' · 正常'});}
-  else if(mkt.vix>0){score+=5;rules.push({good:true,text:'VIX '+mkt.vix.toFixed(1)+' · 低波動 有利'});}
+  // 3. SMH 先行指標（最多扣/加10）
+  if(mkt.smhChg<=-2){score-=10;rules.push({s:'r',t:'SMH今日跌'+Math.abs(mkt.smhChg).toFixed(1)+'% · 半導體弱'});}
+  else if(mkt.smhChg<0){score-=4;rules.push({s:'y',t:'SMH今日小跌'});}
+  else if(mkt.smhChg>=2){score+=8;rules.push({s:'g',t:'SMH今日漲'+mkt.smhChg.toFixed(1)+'% · 先行強勢'});}
+  else if(mkt.smhChg>0){rules.push({s:'g',t:'SMH今日小漲 · 偏正面'});}
 
-  // 4. 距近期高點
-  if(mkt.dropPct<-8){score-=10;rules.push({bad:true,text:'距近期高點'+mkt.dropPct.toFixed(1)+'% · 跌幅大'});}
-  else if(mkt.dropPct<-4){score-=5;rules.push({warn:true,text:'距近期高點'+mkt.dropPct.toFixed(1)+'%'});}
-  else if(mkt.dropPct>=-2){score+=5;rules.push({good:true,text:'接近高點 · 動能強'});}
-  else{rules.push({good:true,text:'距高點'+mkt.dropPct.toFixed(1)+'%'});}
+  // 4. IWM 風險情緒（最多扣/加8）
+  if(mkt.iwmChg<=-1.5){score-=8;rules.push({s:'r',t:'IWM跌'+Math.abs(mkt.iwmChg).toFixed(1)+'% · 市場風險迴避'});}
+  else if(mkt.iwmChg<0){score-=3;rules.push({s:'y',t:'IWM小跌 · 風險情緒偏弱'});}
+  else if(mkt.iwmChg>=1.5){score+=6;rules.push({s:'g',t:'IWM漲'+mkt.iwmChg.toFixed(1)+'% · 風險偏好強'});}
+  else{rules.push({s:'g',t:'IWM正常 · 風險情緒中性'});}
 
-  // 5. 止跌加分
-  if(mkt.qd===0&&mkt.sd===0&&mkt.stopDays>=3){score+=5;}
+  // 5. VIX（最多扣25）
+  if(mkt.vix>=30){score-=25;rules.push({s:'r',t:'VIX '+mkt.vix.toFixed(1)+' · 市場極度恐慌'});}
+  else if(mkt.vix>=25){score-=15;rules.push({s:'r',t:'VIX '+mkt.vix.toFixed(1)+' · 市場恐慌'});}
+  else if(mkt.vix>=20){score-=7;rules.push({s:'y',t:'VIX '+mkt.vix.toFixed(1)+' · 波動偏高'});}
+  else if(mkt.vix>=15){rules.push({s:'g',t:'VIX '+mkt.vix.toFixed(1)+' · 正常範圍'});}
+  else if(mkt.vix>0){score+=6;rules.push({s:'g',t:'VIX '+mkt.vix.toFixed(1)+' · 低波動 有利進場'});}
+
+  // 6. 距近期高點（最多扣10）
+  if(mkt.drop<-8){score-=10;rules.push({s:'r',t:'距近期高點'+mkt.drop.toFixed(1)+'% · 跌幅偏大'});}
+  else if(mkt.drop<-4){score-=5;rules.push({s:'y',t:'距近期高點'+mkt.drop.toFixed(1)+'%'});}
+  else if(mkt.drop>=-2){score+=4;rules.push({s:'g',t:'接近近期高點 · 動能強'});}
+  else{rules.push({s:'g',t:'距高點'+mkt.drop.toFixed(1)+'% · 正常'});}
 
   score=Math.max(0,Math.min(100,score));
   mkt.conf=score;
 
-  // 判斷等級
-  let level,status,advice,color,barColor;
-  if(score>=80){
-    level='green';status='🟢 積極操作';
-    advice='大盤強勢 · 盤前選股可積極參與 · 信心充足';
-    color='var(--green)';barColor='var(--green)';
-    mkt.level='green';
-  } else if(score>=60){
-    level='yellow';status='🟡 正常操作';
-    advice='大盤偏穩 · 選擇強勢標的進場 · 注意風報比';
-    color='var(--yellow)';barColor='var(--yellow)';
-    mkt.level='yellow';
-  } else if(score>=40){
-    level='orange';status='🟠 謹慎操作';
-    advice='大盤偏弱 · 縮小倉位 · 只做最強的標的';
-    color='var(--orange)';barColor='var(--orange)';
-    mkt.level='orange';
-  } else {
-    level='red';status='🔴 建議觀望';
-    advice='大盤弱勢 · 不追價 · 保留資金等待機會';
-    color='var(--red)';barColor='var(--red)';
-    mkt.level='red';
-  }
+  let color,status,advice,level;
+  if(score>=80){color='var(--green)';status='🟢 積極操作';advice='大盤強勢 · 盤前可積極參與 · 信心充足';level='g';}
+  else if(score>=60){color='var(--yellow)';status='🟡 正常操作';advice='大盤偏穩 · 選強勢標的 · 注意風報比';level='y';}
+  else if(score>=40){color='var(--orange)';status='🟠 謹慎操作';advice='大盤偏弱 · 縮小倉位 · 只做最強的';level='o';}
+  else{color='var(--red)';status='🔴 建議觀望';advice='大盤弱勢 · 不追價 · 保留子彈等機會';level='r';}
+  mkt.level=level;
 
-  // 更新信心指數顯示
-  document.getElementById('conf-score').textContent=score;
-  document.getElementById('conf-score').style.color=color;
+  document.getElementById('conf-num').textContent=score;
+  document.getElementById('conf-num').style.color=color;
   document.getElementById('conf-bar').style.width=score+'%';
-  document.getElementById('conf-bar').style.background=barColor;
+  document.getElementById('conf-bar').style.background=color;
   document.getElementById('conf-status').textContent=status;
   document.getElementById('conf-status').style.color=color;
   document.getElementById('conf-advice').textContent=advice;
 
-  // 更新指標點點顏色
-  const dotQ=document.getElementById('i-qqq-dot');
-  const dotS=document.getElementById('i-soxx-dot');
-  const dotStop=document.getElementById('i-stop-dot');
-  const dotDrop=document.getElementById('i-drop-dot');
-  const dotVix=document.getElementById('i-vix-dot');
-  dotQ.className='metric-icon '+(mkt.qd===0?'good':mkt.qd<=2?'warn':'bad');
-  dotS.className='metric-icon '+(mkt.sd===0?'good':mkt.sd<=2?'warn':'bad');
-  dotStop.className='metric-icon '+(mkt.stopDays>=2?'good':mkt.stopDays===1?'warn':'bad');
-  dotDrop.className='metric-icon '+(mkt.dropPct>=-2?'good':mkt.dropPct>=-5?'warn':'bad');
-  dotVix.className='metric-icon '+(mkt.vix<20?'good':mkt.vix<25?'warn':'bad');
+  // 指標點點
+  const dotCfg=[
+    ['d-qd',   mkt.qd===0?'g':mkt.qd<=2?'y':'r'],
+    ['d-qstop',mkt.qStop>=2?'g':mkt.qStop===1?'y':'r'],
+    ['d-sd',   mkt.sd===0?'g':mkt.sd<=2?'y':'r'],
+    ['d-sstop',mkt.sStop>=2?'g':mkt.sStop===1?'y':'r'],
+    ['d-smh',  mkt.smhChg>=0?'g':mkt.smhChg>-2?'y':'r'],
+    ['d-iwm',  mkt.iwmChg>=0?'g':mkt.iwmChg>-1?'y':'r'],
+    ['d-drop', mkt.drop>=-2?'g':mkt.drop>=-5?'y':'r'],
+    ['d-vix',  mkt.vix<20?'g':mkt.vix<25?'y':'r'],
+  ];
+  dotCfg.forEach(([id,cls])=>{const el=document.getElementById(id);if(el)el.className='mdot '+cls;});
 
   // VIX tag
   const vt=document.getElementById('v-vix');
-  if(mkt.vix<20){vt.textContent=mkt.vix.toFixed(1)+' 低波動';vt.className='tag tg';}
-  else if(mkt.vix<25){vt.textContent=mkt.vix.toFixed(1)+' 注意';vt.className='tag ty';}
-  else if(mkt.vix<30){vt.textContent=mkt.vix.toFixed(1)+' 偏高';vt.className='tag to';}
-  else{vt.textContent=mkt.vix.toFixed(1)+' 恐慌';vt.className='tag tr';}
+  if(mkt.vix>0){
+    if(mkt.vix<15){vt.textContent=mkt.vix.toFixed(1)+' 低波動';vt.className='tag tg';}
+    else if(mkt.vix<20){vt.textContent=mkt.vix.toFixed(1)+' 正常';vt.className='tag tg';}
+    else if(mkt.vix<25){vt.textContent=mkt.vix.toFixed(1)+' 偏高';vt.className='tag ty';}
+    else if(mkt.vix<30){vt.textContent=mkt.vix.toFixed(1)+' 恐慌';vt.className='tag to';}
+    else{vt.textContent=mkt.vix.toFixed(1)+' 極度恐慌';vt.className='tag tr';}
+  }
 
   // 操作指引
-  document.getElementById('guidance-list').innerHTML=rules.slice(0,5).map(r=>`
+  document.getElementById('guidance-list').innerHTML=rules.slice(0,6).map(r=>`
     <div style="display:flex;align-items:flex-start;gap:8px;padding:8px 10px;border-radius:7px;background:var(--bg3)">
-      <span style="margin-top:1px">${r.good?'✅':r.warn?'⚠️':'❌'}</span>
-      <span style="font-size:13px;color:${r.good?'var(--green)':r.warn?'var(--yellow)':'var(--red)'}">${r.text}</span>
+      <span style="margin-top:1px">${r.s==='g'?'✅':r.s==='y'?'⚠️':'❌'}</span>
+      <span style="font-size:13px;color:${r.s==='g'?'var(--green)':r.s==='y'?'var(--yellow)':'var(--red)'}">${r.t}</span>
     </div>`).join('');
 
-  // 同步更新盤前頁警示
-  updatePMAlert();
+  updatePMBanner();
 }
 
-function updatePMAlert(){
-  const alert=document.getElementById('pm-alert');
-  const tag=document.getElementById('pm-market-tag');
-  const conf=mkt.conf;
-  let cls,text,tagCls,tagText;
-  if(conf>=80){cls='green';text='大盤綠燈 · 信心指數'+conf+'/100 · 可積極操作';tagCls='tg';tagText='信心 '+conf+'/100';}
-  else if(conf>=60){cls='yellow';text='大盤黃燈 · 信心指數'+conf+'/100 · 選擇強勢標的';tagCls='ty';tagText='信心 '+conf+'/100';}
-  else if(conf>=40){cls='orange';text='⚠️ 大盤橘燈 · 信心指數'+conf+'/100 · 縮小倉位 只做最強';tagCls='to';tagText='信心 '+conf+'/100';}
-  else{cls='red';text='🚨 大盤紅燈 · 信心指數'+conf+'/100 · 建議觀望 不追價';tagCls='tr';tagText='信心 '+conf+'/100';}
-  alert.className='alert-banner '+cls;
-  alert.innerHTML='<span style="font-size:18px">'+(conf>=80?'🟢':conf>=60?'🟡':conf>=40?'🟠':'🔴')+'</span><span>'+text+'</span>';
-  alert.style.display='flex';
-  tag.innerHTML=`<span class="tag ${tagCls}">${tagText}</span>`;
+function updatePMBanner(){
+  const s=mkt.conf,l=mkt.level;
+  const icons={g:'🟢',y:'🟡',o:'🟠',r:'🔴'};
+  const texts={
+    g:'大盤綠燈 · 信心指數 '+s+'/100 · 可積極操作',
+    y:'大盤黃燈 · 信心指數 '+s+'/100 · 正常操作',
+    o:'⚠️ 大盤橘燈 · 信心指數 '+s+'/100 · 縮小倉位',
+    r:'🚨 大盤紅燈 · 信心指數 '+s+'/100 · 建議觀望'
+  };
+  document.getElementById('pm-alert').className='alert '+l;
+  document.getElementById('pm-alert').innerHTML=`<span style="font-size:18px">${icons[l]}</span><span>${texts[l]}</span>`;
+  document.getElementById('pm-conf-tag').innerHTML=`<span class="tag ${l==='g'?'tg':l==='y'?'ty':l==='o'?'to':'tr'}">信心 ${s}/100</span>`;
 }
 
-// ── 盤前掃描 ──
+// ── 盤前 ──
 async function scanPM(){
   const btn=document.getElementById('pm-btn');
-  btn.disabled=true; btn.textContent='掃描中...';
+  btn.disabled=true;btn.textContent='掃描中...';
   document.getElementById('pm-top').innerHTML='<div class="loading"><div class="spin"></div> 抓取強勢股...</div>';
   document.getElementById('pm-body').innerHTML='<tr><td colspan="11" class="loading"><div class="spin"></div></td></tr>';
-
-  updatePMAlert();
+  updatePMBanner();
 
   try{
     const d=await fmpGet('/stock_market/gainers');
     if(!d||!d.length)throw new Error('無數據（可能是休市或盤後）');
-
     const minC=parseFloat(document.getElementById('fc').value)||2;
     const minM=parseFloat(document.getElementById('fm').value)||500;
     const minP=parseFloat(document.getElementById('fp1').value)||5;
     const maxP=parseFloat(document.getElementById('fp2').value)||200;
-
-    const fil=d.filter(s=>{
-      const c=s.changesPercentage||0;
-      const m=(s.marketCap||0)/1e6;
-      const p=s.price||0;
-      return c>=minC&&m>=minM&&p>=minP&&p<=maxP;
-    }).map(s=>{
-      const base=baseScore(s);
-      const mktBonus=mktBonus_(base);
-      const final=base+mktBonus;
-      return{...s,base,mktBonus,final};
-    }).sort((a,b)=>b.final-a.final);
-
+    const fil=d.filter(s=>(s.changesPercentage||0)>=minC&&(s.marketCap||0)/1e6>=minM&&(s.price||0)>=minP&&(s.price||0)<=maxP)
+      .map(s=>{const b=baseScore(s),mb=mktAdj(b);return{...s,base:b,mb,final:Math.max(0,b+mb)};})
+      .sort((a,b)=>b.final-a.final);
     renderTop(fil.slice(0,3));
-    renderTable(fil.slice(0,30));
+    renderTbl(fil.slice(0,30));
   }catch(e){
-    document.getElementById('pm-top').innerHTML=`<div class="empty">📭 ${e.message}<br><span style="font-size:11px;margin-top:6px;display:block;color:var(--text3)">盤前 04:00~09:30 / 盤中 09:30~16:00 EST (台灣時間+13小時)</span></div>`;
-    document.getElementById('pm-body').innerHTML=`<tr><td colspan="11" class="empty">請在美股交易時段重試</td></tr>`;
+    document.getElementById('pm-top').innerHTML=`<div class="empty">📭 ${e.message}<br><span style="font-size:11px;margin-top:6px;display:block;color:var(--text3)">美股盤前 04:00~09:30 / 盤中 09:30~16:00 EST（台灣+13小時）</span></div>`;
+    document.getElementById('pm-body').innerHTML=`<tr><td colspan="11" class="empty">請在交易時段重試</td></tr>`;
   }
-
-  btn.disabled=false; btn.textContent='⟳ 重新掃描';
+  btn.disabled=false;btn.textContent='⟳ 重新掃描';
 }
 
-// 基本評分（不含大盤）
 function baseScore(s){
   let sc=0;
-  const c=s.changesPercentage||0, v=s.volume||0, m=(s.marketCap||0)/1e6, p=s.price||0;
-  if(c>=8)sc+=3; else if(c>=5)sc+=2; else if(c>=3)sc+=1;
-  if(v>=1e6)sc+=3; else if(v>=5e5)sc+=2; else if(v>=1e5)sc+=1;
-  if(m>=5000)sc+=3; else if(m>=1000)sc+=2; else if(m>=500)sc+=1;
-  if(p>=10&&p<=60)sc+=2; else if(p>=5&&p<=100)sc+=1;
-  return sc; // 最高 11 分
+  const c=s.changesPercentage||0,v=s.volume||0,m=(s.marketCap||0)/1e6,p=s.price||0;
+  if(c>=8)sc+=3;else if(c>=5)sc+=2;else if(c>=3)sc+=1;
+  if(v>=1e6)sc+=3;else if(v>=5e5)sc+=2;else if(v>=1e5)sc+=1;
+  if(m>=5000)sc+=3;else if(m>=1000)sc+=2;else if(m>=500)sc+=1;
+  if(p>=10&&p<=60)sc+=2;else if(p>=5&&p<=100)sc+=1;
+  return sc;
 }
-
-// 大盤加權（根據信心指數）
-function mktBonus_(base){
-  if(mkt.conf>=80) return Math.round(base*0.3);  // 大盤強：加30%
-  if(mkt.conf>=60) return Math.round(base*0.1);  // 大盤穩：加10%
-  if(mkt.conf>=40) return -Math.round(base*0.2); // 大盤弱：扣20%
-  return -Math.round(base*0.5);                  // 大盤差：扣50%
+function mktAdj(base){
+  if(mkt.conf>=80)return Math.round(base*0.3);
+  if(mkt.conf>=60)return Math.round(base*0.1);
+  if(mkt.conf>=40)return -Math.round(base*0.2);
+  return -Math.round(base*0.5);
 }
-
-function verdict(final){
-  if(final>=10)return{c:'tg',t:'✅ 強力候選'};
-  if(final>=7) return{c:'ty',t:'👀 值得觀察'};
-  if(final>=4) return{c:'to',t:'⚠️ 謹慎考慮'};
+function verdict(f){
+  if(f>=10)return{c:'tg',t:'✅ 強力候選'};
+  if(f>=7) return{c:'ty',t:'👀 值得觀察'};
+  if(f>=4) return{c:'to',t:'⚠️ 謹慎考慮'};
   return{c:'tr',t:'❌ 建議跳過'};
 }
 
 function renderTop(arr){
-  if(!arr.length){document.getElementById('pm-top').innerHTML='<div class="empty">沒有符合條件的標的</div>';return;}
-  const ranks=['pm1','pm2','pm3'];
-  const confOk=mkt.conf>=60;
+  if(!arr.length){document.getElementById('pm-top').innerHTML='<div class="empty">無符合條件的標的</div>';return;}
+  const ranks=['pm1','pm2','pm3'],medals=['🥇','🥈','🥉'];
   document.getElementById('pm-top').innerHTML=arr.map((s,i)=>{
-    const v=verdict(s.final), c=s.changesPercentage||0, p=s.price||0;
-    const mktTag=s.mktBonus>0?`<span style="color:var(--green);font-size:11px">大盤加分 +${s.mktBonus}</span>`:s.mktBonus<0?`<span style="color:var(--red);font-size:11px">大盤扣分 ${s.mktBonus}</span>`:`<span style="color:var(--text3);font-size:11px">大盤中性</span>`;
+    const v=verdict(s.final),c=s.changesPercentage||0,p=s.price||0;
+    const mbTxt=s.mb>0?`<span style="color:var(--green);font-size:11px">大盤加 +${s.mb}</span>`:s.mb<0?`<span style="color:var(--red);font-size:11px">大盤扣 ${s.mb}</span>`:`<span style="color:var(--text3);font-size:11px">大盤中性</span>`;
     return`<div class="pmcard ${ranks[i]||''}">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
-        <div style="font-size:11px;color:var(--text3);font-family:var(--mono)">NO.${i+1} ${['🥇','🥈','🥉'][i]||''}</div>
+        <div style="font-size:11px;color:var(--text3);font-family:var(--mono)">NO.${i+1} ${medals[i]||''}</div>
         <span class="tag ${v.c}">${v.t}</span>
       </div>
       <div style="font-family:var(--mono);font-size:22px;font-weight:600;color:var(--accent);margin-bottom:3px">${s.symbol}</div>
@@ -641,18 +654,18 @@ function renderTop(arr){
         <div><div style="font-size:10px;color:var(--text3);margin-bottom:2px">市值</div><div style="font-family:var(--mono);font-size:14px">${fC(s.marketCap)}</div></div>
       </div>
       <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid var(--border)">
-        <div style="font-size:12px">基本 <b style="font-family:var(--mono)">${s.base}</b> ${mktTag}</div>
-        <div style="font-family:var(--mono);font-size:16px;font-weight:600;color:${s.final>=10?'var(--green)':s.final>=7?'var(--yellow)':s.final>=4?'var(--orange)':'var(--red)'}">最終 ${s.final}</div>
+        <div style="font-size:12px;color:var(--text2)">基本 <b style="font-family:var(--mono);color:var(--text)">${s.base}/11</b> · ${mbTxt}</div>
+        <div style="font-family:var(--mono);font-size:18px;font-weight:600;color:${s.final>=10?'var(--green)':s.final>=7?'var(--yellow)':s.final>=4?'var(--orange)':'var(--red)'}">最終 ${s.final}</div>
       </div>
     </div>`;
   }).join('');
 }
 
-function renderTable(arr){
+function renderTbl(arr){
   if(!arr.length){document.getElementById('pm-body').innerHTML='<tr><td colspan="11" class="empty">無符合條件的標的</td></tr>';return;}
   document.getElementById('pm-body').innerHTML=arr.map((s,i)=>{
-    const v=verdict(s.final), c=s.changesPercentage||0;
-    const bonusTxt=s.mktBonus>0?`<span style="color:var(--green)">+${s.mktBonus}</span>`:s.mktBonus<0?`<span style="color:var(--red)">${s.mktBonus}</span>`:`<span style="color:var(--text3)">0</span>`;
+    const v=verdict(s.final),c=s.changesPercentage||0;
+    const mbTxt=s.mb>0?`<span style="color:var(--green)">+${s.mb}</span>`:s.mb<0?`<span style="color:var(--red)">${s.mb}</span>`:`<span style="color:var(--text3)">0</span>`;
     return`<tr>
       <td style="color:var(--text3);font-family:var(--mono);font-size:12px">${i+1}</td>
       <td class="ttk">${s.symbol}</td>
@@ -662,7 +675,7 @@ function renderTable(arr){
       <td style="font-family:var(--mono);color:var(--text2)">${fV(s.volume)}</td>
       <td style="font-family:var(--mono);color:var(--text2)">${fC(s.marketCap)}</td>
       <td style="font-family:var(--mono);color:var(--accent)">${s.base}/11</td>
-      <td style="font-family:var(--mono)">${bonusTxt}</td>
+      <td>${mbTxt}</td>
       <td style="font-family:var(--mono);font-weight:600;color:${s.final>=10?'var(--green)':s.final>=7?'var(--yellow)':s.final>=4?'var(--orange)':'var(--red)'}">${s.final}</td>
       <td><span class="tag ${v.c}">${v.t}</span></td>
     </tr>`;
