@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
@@ -7,26 +7,26 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:    #080c0a;
-  --bg1:   #0b110e;
-  --bg2:   #0f1812;
-  --bg3:   #141f18;
-  --bg4:   #1a2920;
-  --b:     rgba(255,255,255,0.06);
-  --b2:    rgba(255,255,255,0.10);
-  --G:     #22c55e;   /* 美股漲 綠 */
+  --bg:    #020407;
+  --bg1:   #040810;
+  --bg2:   #070d18;
+  --bg3:   #0c1420;
+  --bg4:   #121c2a;
+  --b:     rgba(255,255,255,0.05);
+  --b2:    rgba(255,255,255,0.09);
+  --G:     #22c55e;
   --Gd:    #16a34a;
   --Gl:    rgba(34,197,94,0.12);
   --Gm:    rgba(34,197,94,0.06);
-  --R:     #ef4444;   /* 美股跌 紅 */
+  --R:     #ef4444;
   --Rd:    #dc2626;
   --Rl:    rgba(239,68,68,0.12);
   --Rm:    rgba(239,68,68,0.06);
   --Y:     #eab308;
   --O:     #f97316;
-  --text:  #d1fae5;
-  --text2: #4d7a5e;
-  --text3: #1e3a28;
+  --text:  #e2e8f0;
+  --text2: #4a5a7a;
+  --text3: #1e2d48;
   --mono:  'IBM Plex Mono', monospace;
   --sans:  'Noto Sans TC', sans-serif;
 }
@@ -39,31 +39,38 @@ body {
   overflow-x: hidden;
 }
  
-/* K棒背景 — 左綠右紅，中間黑暗壓迫 */
+/* 深空星圖 canvas 固定背景 */
+#star-canvas {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+ 
+/* 深空暈染 — 深藍底光 */
 body::before {
   content: '';
   position: fixed; inset: 0;
   background:
-    radial-gradient(ellipse 50% 80% at 0% 50%, rgba(34,197,94,0.07) 0%, transparent 60%),
-    radial-gradient(ellipse 50% 80% at 100% 50%, rgba(239,68,68,0.06) 0%, transparent 60%),
-    radial-gradient(ellipse 60% 40% at 50% 100%, rgba(34,197,94,0.04) 0%, transparent 50%);
+    radial-gradient(ellipse 70% 50% at 50% 0%,   rgba(30,60,120,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 10% 80%,  rgba(34,197,94,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 90% 20%,  rgba(239,68,68,0.04) 0%, transparent 50%);
   pointer-events: none; z-index: 0;
 }
-/* 格線 */
+/* 細格線 */
 body::after {
   content: '';
   position: fixed; inset: 0;
   background-image:
-    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-  background-size: 36px 36px;
+    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 48px 48px;
   pointer-events: none; z-index: 0;
 }
  
 /* ── 密碼頁 ── */
 #lock {
   position: fixed; inset: 0;
-  background: var(--bg);
+  background: transparent;
   display: flex; align-items: center; justify-content: center;
   z-index: 9999;
 }
@@ -83,12 +90,14 @@ body::after {
 }
 @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 .lock-card {
-  background: var(--bg2);
-  border: 1px solid var(--b2);
+  background: rgba(7,13,24,0.85);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 20px;
   padding: 44px 36px;
   text-align: center;
   position: relative; overflow: hidden;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 60px rgba(34,197,94,0.06), 0 0 100px rgba(30,60,120,0.15);
 }
 /* 頂部雙色漸層線 — 綠左紅右 K棒感 */
 .lock-card::before {
@@ -445,6 +454,8 @@ tr:hover td { background: rgba(34,197,94,0.02); }
 </style>
 </head>
 <body>
+ 
+<canvas id="star-canvas"></canvas>
  
 <!-- 密碼頁 -->
 <div id="lock">
@@ -858,7 +869,174 @@ function updateBanner(){
   document.getElementById('pm-tag').innerHTML=`<span class="tag ${tc[l]}">信心 ${s}/100</span>`;
 }
  
-// ── 盤前 ──
+// ══════════════════════════════════════════
+// 深空星圖背景動畫
+// ══════════════════════════════════════════
+(function(){
+  const canvas = document.getElementById('star-canvas');
+  const ctx = canvas.getContext('2d');
+ 
+  const TICKERS = [
+    'NVDA','TSLA','PLTR','AAPL','MSFT','GOOGL','META','AMZN',
+    'QQQ','SPY','SOXX','SMH','MU','NBIS','RKLB','ONDS','AXTI',
+    'TSM','LITE','VRT','LEU','SOFI','IREN','BBAI','NVTS'
+  ];
+ 
+  let W, H, stars = [], nebulas = [];
+ 
+  function resize(){
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+ 
+  function initStars(){
+    stars = [];
+    nebulas = [];
+ 
+    // 小背景星點（純白點）
+    for(let i = 0; i < 200; i++){
+      stars.push({
+        type: 'dot',
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.06,
+        vy: (Math.random() - 0.5) * 0.04,
+        size: Math.random() * 1.2 + 0.3,
+        alpha: Math.random() * 0.4 + 0.1,
+        pulse: Math.random() * Math.PI * 2,
+        pulseSpeed: 0.005 + Math.random() * 0.015,
+      });
+    }
+ 
+    // 股票星（帶標籤，漲綠跌紅）
+    for(let i = 0; i < TICKERS.length; i++){
+      const up = Math.random() > 0.45;
+      stars.push({
+        type: 'ticker',
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.12,
+        vy: (Math.random() - 0.5) * 0.08,
+        size: Math.random() * 2 + 1.5,
+        label: TICKERS[i],
+        up,
+        alpha: 0,
+        targetAlpha: Math.random() * 0.6 + 0.3,
+        pulse: Math.random() * Math.PI * 2,
+        pulseSpeed: 0.008 + Math.random() * 0.012,
+        showLabel: Math.random() > 0.4,
+      });
+    }
+ 
+    // 星雲光暈（大型柔光球）
+    for(let i = 0; i < 4; i++){
+      nebulas.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        r: 80 + Math.random() * 160,
+        up: Math.random() > 0.5,
+        alpha: 0.03 + Math.random() * 0.04,
+        vx: (Math.random() - 0.5) * 0.15,
+        vy: (Math.random() - 0.5) * 0.1,
+        t: Math.random() * Math.PI * 2,
+      });
+    }
+  }
+ 
+  let frame = 0;
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+ 
+    // 星雲
+    nebulas.forEach(n => {
+      n.t += 0.003;
+      n.x += n.vx + Math.sin(n.t) * 0.2;
+      n.y += n.vy + Math.cos(n.t * 0.7) * 0.15;
+      if(n.x < -n.r) n.x = W + n.r;
+      if(n.x > W + n.r) n.x = -n.r;
+      if(n.y < -n.r) n.y = H + n.r;
+      if(n.y > H + n.r) n.y = -n.r;
+      const gr = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r);
+      const col = n.up ? '34,197,94' : '239,68,68';
+      gr.addColorStop(0, `rgba(${col},${n.alpha})`);
+      gr.addColorStop(1, `rgba(${col},0)`);
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = gr;
+      ctx.fill();
+    });
+ 
+    // 小星點
+    stars.forEach(s => {
+      s.x = (s.x + s.vx + W) % W;
+      s.y = (s.y + s.vy + H) % H;
+      s.pulse += s.pulseSpeed;
+      const blink = 0.7 + 0.3 * Math.sin(s.pulse);
+ 
+      if(s.type === 'dot'){
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(220,230,255,${s.alpha * blink})`;
+        ctx.fill();
+      }
+ 
+      if(s.type === 'ticker'){
+        // 淡入
+        s.alpha = Math.min(s.targetAlpha, s.alpha + 0.003);
+        const a = s.alpha * blink;
+        const col = s.up ? '34,197,94' : '239,68,68';
+ 
+        // 星點核心
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${col},${a})`;
+        ctx.fill();
+ 
+        // 發光光暈
+        const glow = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size * 4);
+        glow.addColorStop(0, `rgba(${col},${a * 0.4})`);
+        glow.addColorStop(1, `rgba(${col},0)`);
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.size * 4, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+ 
+        // Ticker 標籤（只有亮度夠才顯示）
+        if(s.showLabel && blink > 0.75 && a > 0.2){
+          ctx.font = `${Math.round(Math.max(10, W * 0.009))}px 'IBM Plex Mono', monospace`;
+          ctx.fillStyle = `rgba(${col},${a * 0.55})`;
+          ctx.fillText(s.label, s.x + s.size + 4, s.y + 4);
+        }
+      }
+    });
+ 
+    // 偶爾有流星
+    if(frame % 300 === 0){
+      const sx = Math.random() * W * 0.6;
+      const sy = Math.random() * H * 0.4;
+      const len = 60 + Math.random() * 80;
+      const grad = ctx.createLinearGradient(sx, sy, sx + len, sy + len * 0.4);
+      grad.addColorStop(0, 'rgba(255,255,255,0)');
+      grad.addColorStop(0.3, 'rgba(255,255,255,0.6)');
+      grad.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.lineTo(sx + len, sy + len * 0.4);
+      ctx.strokeStyle = grad;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+ 
+    frame++;
+    requestAnimationFrame(draw);
+  }
+ 
+  resize();
+  initStars();
+  draw();
+  window.addEventListener('resize', () => { resize(); initStars(); });
+})();
+ 
 async function scanPM(){
   const btn=document.getElementById('pm-btn');
   btn.disabled=true; btn.textContent='掃描中...';
