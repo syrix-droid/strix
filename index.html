@@ -698,26 +698,53 @@ function go(n,el){
   if(el)el.classList.add('on');
 }
 
-// ── Finnhub ──
-const FH = 'd79th6hr01qspme635vgd79th6hr01qspme63600';
-async function fhQuote(symbol){
+// ── Polygon.io ──
+const PG = 'I4BamfSMbtFEaylu6KertzrRGxyFMDt0';
+
+async function pgQuote(symbol){
   try{
-    const r=await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${FH}`);
+    const r=await fetch(`https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/tickers/${symbol}?apiKey=${PG}`);
     const d=await r.json();
-    if(!d||!d.c)return null;
-    const price=d.c, prev=d.pc;
+    if(!d||!d.ticker)return null;
+    const t=d.ticker;
+    const price=t.day?.c||t.lastTrade?.p||0;
+    const prev=t.prevDay?.c||0;
     const chg=prev?((price-prev)/prev*100):0;
-    return{price,changesPercentage:chg,prev};
+    return{price,changesPercentage:chg};
   }catch{return null;}
 }
-async function fhCandles(symbol,days){
+
+async function pgVix(){
   try{
-    const to=Math.floor(Date.now()/1000);
-    const from=to-days*24*3600;
-    const r=await fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${symbol}&resolution=D&from=${from}&to=${to}&token=${FH}`);
+    // VIX via indices snapshot
+    const r=await fetch(`https://api.polygon.io/v2/snapshot/locale/us/markets/indices/tickers/I:VIX?apiKey=${PG}`);
     const d=await r.json();
-    if(!d||d.s!=='ok'||!d.c)return null;
-    return d.c;
+    if(!d||!d.results)return null;
+    const res=d.results;
+    const price=res.value||res.session?.close||0;
+    const prev=res.prevDay?.value||res.previousSession?.close||0;
+    const chg=prev?((price-prev)/prev*100):0;
+    return{price,changesPercentage:chg};
+  }catch{return null;}
+}
+
+async function pgCandles(symbol,days){
+  try{
+    const to=new Date().toISOString().slice(0,10);
+    const from=new Date(Date.now()-days*24*3600*1000).toISOString().slice(0,10);
+    const r=await fetch(`https://api.polygon.io/v2/aggs/ticker/${symbol}/range/1/day/${from}/${to}?adjusted=true&sort=asc&limit=50&apiKey=${PG}`);
+    const d=await r.json();
+    if(!d||!d.results||!d.results.length)return null;
+    return d.results.map(x=>x.c);
+  }catch{return null;}
+}
+
+async function pgGainers(){
+  try{
+    const r=await fetch(`https://api.polygon.io/v2/snapshot/locale/us/markets/stocks/gainers?apiKey=${PG}`);
+    const d=await r.json();
+    if(!d||!d.tickers)return null;
+    return d.tickers;
   }catch{return null;}
 }
 
@@ -751,7 +778,7 @@ async function init(){
 // ── 大盤 ──
 async function loadMarket(){
   const [qqq,soxx,smh,spy,iwm,vix]=await Promise.all([
-    fhQuote('QQQ'),fhQuote('SOXX'),fhQuote('SMH'),fhQuote('SPY'),fhQuote('IWM'),fhQuote('CBOE:VIX')
+    pgQuote('QQQ'),pgQuote('SOXX'),pgQuote('SMH'),pgQuote('SPY'),pgQuote('IWM'),pgVix()
   ]);
   setETF('qqq',qqq); setETF('soxx',soxx); setETF('smh',smh);
   setETF('spy',spy); setETF('iwm',iwm); setETF('vix',vix,true);
@@ -767,7 +794,7 @@ async function loadMarket(){
   if(qqq) document.getElementById('en-qqq').textContent='距近期高點計算中';
   if(spy) document.getElementById('en-spy').textContent=(spy.changesPercentage>=0?'大盤上漲':'大盤下跌');
 
-  const [qCl,sCl]=await Promise.all([fhCandles('QQQ',45),fhCandles('SOXX',45)]);
+  const [qCl,sCl]=await Promise.all([pgCandles('QQQ',45),pgCandles('SOXX',45)]);
   if(qCl&&qCl.length>=2){
     const{dn,up}=calcDU(qCl);
     M.qd=dn; M.qStop=up;
@@ -1077,43 +1104,34 @@ function updateBanner(){
 async function scanPM(){
   const btn=document.getElementById('pm-btn');
   btn.disabled=true; btn.textContent='掃描中...';
-  document.getElementById('pm-top').innerHTML='<div class="loading"><div class="spin"></div> 抓取行情中...</div>';
+  document.getElementById('pm-top').innerHTML='<div class="loading"><div class="spin"></div> 全美股掃描中...</div>';
   document.getElementById('pm-body').innerHTML='<tr><td colspan="11" class="loading"><div class="spin"></div></td></tr>';
   updateBanner();
   try{
-    // AI + 半導體 + 科技核心清單
-    const WATCH=[
-      // 輝達生態系
-      'NVDA','NVDS','SMCI','DELL','HPE','ANET',
-      // 半導體
-      'AMD','AVGO','QCOM','MU','ARM','TSM','AMAT','LRCX','KLAC','MRVL','ONTO','WOLF','COHU',
-      // AI軟體/雲端
-      'PLTR','MSFT','GOOGL','META','AMZN','ORCL','CRM','SNOW','DDOG','MDB','AI','BBAI','SOUN','IONQ',
-      // 新興AI/機器人/太空
-      'TSLA','RKLB','ASTS','LUNR','JOBY','ACHR','NBIS','SERV','IREN','CORZ'
-    ];
     const minC=parseFloat(document.getElementById('fc').value)||2;
+    const minM=parseFloat(document.getElementById('fm').value)||500;
     const minP=parseFloat(document.getElementById('fp1').value)||5;
     const maxP=parseFloat(document.getElementById('fp2').value)||200;
 
-    // 批次抓取，避免超過 API 限制
-    const results=[];
-    for(let i=0;i<WATCH.length;i+=10){
-      const batch=WATCH.slice(i,i+10);
-      const quotes=await Promise.all(batch.map(s=>fhQuote(s)));
-      batch.forEach((sym,idx)=>{
-        const q=quotes[idx];
-        if(!q)return;
-        if(q.changesPercentage>=minC&&q.price>=minP&&q.price<=maxP){
-          results.push({symbol:sym,name:sym,changesPercentage:q.changesPercentage,price:q.price,volume:0,marketCap:0});
-        }
-      });
-      if(i+10<WATCH.length)await sleep(500);
-    }
+    const raw=await pgGainers();
+    if(!raw||!raw.length)throw new Error('無數據（可能是休市或盤後）');
 
-    if(!results.length)throw new Error('目前無符合條件的標的');
-    const fil=results.map(s=>{const b=bSc(s),mb=mAdj(b);return{...s,base:b,mb,final:Math.max(0,b+mb)};})
-      .sort((a,b)=>b.changesPercentage-a.changesPercentage);
+    const fil=raw.filter(t=>{
+      const c=(t.todaysChangePerc||0);
+      const p=t.day?.c||t.lastTrade?.p||0;
+      const m=(t.marketCap||0)/1e6;
+      return c>=minC&&p>=minP&&p<=maxP&&(m===0||m>=minM);
+    }).map(t=>{
+      const c=t.todaysChangePerc||0;
+      const p=t.day?.c||t.lastTrade?.p||0;
+      const v=t.day?.v||0;
+      const mc=t.marketCap||0;
+      const s={symbol:t.ticker,name:t.ticker,changesPercentage:c,price:p,volume:v,marketCap:mc};
+      const b=bSc(s),mb=mAdj(b);
+      return{...s,base:b,mb,final:Math.max(0,b+mb)};
+    }).sort((a,b)=>b.final-a.final);
+
+    if(!fil.length)throw new Error('無符合條件的標的');
     renderTop(fil.slice(0,3));
     renderTbl(fil.slice(0,30));
   }catch(e){
