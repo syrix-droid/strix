@@ -38,14 +38,14 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
-
+ 
 /* 深空星圖 canvas 固定背景 */
 #star-canvas {
   position: fixed; inset: 0;
   width: 100%; height: 100%;
   z-index: 0; pointer-events: none;
 }
-
+ 
 /* 深空暈染 — 深藍底光 */
 body::before {
   content: '';
@@ -66,7 +66,7 @@ body::after {
   background-size: 48px 48px;
   pointer-events: none; z-index: 0;
 }
-
+ 
 /* ── 密碼頁 ── */
 #lock {
   position: fixed; inset: 0;
@@ -154,7 +154,7 @@ body::after {
 }
 .lock-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
 .lock-err { font-size: 11px; color: var(--R); margin-top: 10px; min-height: 16px; font-family: var(--mono); }
-
+ 
 /* ── NAV ── */
 #app { display: none; position: relative; z-index: 1; }
 .nav {
@@ -210,7 +210,7 @@ body::after {
 .nav-r { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; }
 .ntime { font-family: var(--mono); font-size: 11px; color: var(--text2); }
 .nupd  { font-family: var(--mono); font-size: 9px; color: var(--text3); }
-
+ 
 /* ── 主內容 ── */
 .main {
   padding-top: 72px; padding-bottom: 48px;
@@ -220,14 +220,14 @@ body::after {
 .pg { display: none; }
 .pg.on { display: block; animation: fadeIn 0.25s ease; }
 @keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
-
+ 
 /* ── 格線 ── */
 .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
 .g6 { display: grid; grid-template-columns: repeat(6,1fr); gap: 10px; }
 @media(max-width:960px) { .g6 { grid-template-columns: repeat(3,1fr); } }
 @media(max-width:640px) { .g2,.g3 { grid-template-columns: 1fr; } .g6 { grid-template-columns: repeat(2,1fr); } }
-
+ 
 /* ── 信心指數面板 ── K棒擠壓設計 */
 .conf-panel {
   border-radius: 16px; padding: 28px 32px;
@@ -273,7 +273,7 @@ body::after {
 .conf-advice { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 14px; }
 .conf-bar-bg { background: rgba(255,255,255,0.06); border-radius: 2px; height: 4px; overflow: hidden; }
 .conf-bar { height: 100%; border-radius: 2px; transition: width 0.8s ease, background 0.5s; }
-
+ 
 /* ── ETF 卡片 ── */
 .ecard {
   background: rgba(255,255,255,0.025);
@@ -300,7 +300,7 @@ body::after {
 .e-chg  { font-family: var(--mono); font-size: 13px; font-weight: 600; }
 .e-note { font-size: 10px; color: var(--text3); margin-top: 3px; }
 .up { color: var(--G); } .dn { color: var(--R); }
-
+ 
 /* ── 卡片/面板 ── */
 .panel {
   background: rgba(255,255,255,0.025);
@@ -319,7 +319,7 @@ body::after {
   display: flex; align-items: center; gap: 8px;
 }
 .ptitle::after { content: ''; flex: 1; height: 1px; background: var(--b); }
-
+ 
 /* ── 指標列 ── */
 .mrow {
   display: flex; align-items: center; justify-content: space-between;
@@ -342,7 +342,7 @@ body::after {
   background: rgba(255,255,255,0.04); padding: 2px 6px; border-radius: 3px; margin-left: 3px;
 }
 .mval { font-family: var(--mono); font-size: 14px; font-weight: 500; }
-
+ 
 /* +/- 控制 */
 .adj-wrap { display: flex; align-items: center; gap: 8px; }
 .adj-btn {
@@ -357,7 +357,7 @@ body::after {
   font-family: var(--mono); font-size: 17px; font-weight: 600;
   min-width: 24px; text-align: center;
 }
-
+ 
 /* 指引 */
 .guide-row {
   display: flex; align-items: flex-start; gap: 10px;
@@ -367,7 +367,7 @@ body::after {
 .guide-row:last-child { margin-bottom: 0; }
 .guide-icon { font-size: 13px; flex-shrink: 0; margin-top: 1px; }
 .guide-txt { font-size: 13px; line-height: 1.5; }
-
+ 
 /* ── Tags ── */
 .tag {
   display: inline-flex; align-items: center;
@@ -381,13 +381,13 @@ body::after {
 .to  { background: rgba(249,115,22,0.1); color: var(--O); border-color: rgba(249,115,22,0.2); }
 .ty  { background: rgba(234,179,8,0.1); color: var(--Y); border-color: rgba(234,179,8,0.2); }
 .tg2 { background: rgba(255,255,255,0.04); color: var(--text2); border-color: var(--b); }
-
+ 
 /* ── 按鈕 ── */
 .btn { padding: 9px 18px; border-radius: 7px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; font-family: var(--sans); transition: all 0.2s; }
 .btn-g { background: linear-gradient(90deg, var(--Gd), var(--G)); color: #fff; }
 .btn-g:hover { filter: brightness(1.1); transform: translateY(-1px); }
 .btn-g:disabled { opacity: 0.4; cursor: not-allowed; transform: none; filter: none; }
-
+ 
 /* ── 表格 ── */
 .tbl { overflow-x: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -397,13 +397,13 @@ td { padding: 11px 14px; border-bottom: 1px solid rgba(255,255,255,0.03); white-
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: rgba(255,255,255,0.02); }
 .ttk { font-family: var(--mono); font-weight: 600; color: var(--G); font-size: 14px; }
-
+ 
 /* ── 載入 ── */
 .loading { display: flex; align-items: center; gap: 8px; color: var(--text2); font-size: 13px; padding: 32px; justify-content: center; }
 .spin { width: 15px; height: 15px; border: 1.5px solid rgba(255,255,255,0.08); border-top-color: rgba(255,255,255,0.4); border-radius: 50%; animation: sp 0.7s linear infinite; }
 @keyframes sp { to { transform: rotate(360deg); } }
 .empty { text-align: center; padding: 40px; color: var(--text3); font-size: 12px; font-family: var(--mono); }
-
+ 
 /* ── 盤前大卡片 ── */
 .pm-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 12px; margin-bottom: 14px; }
 .pmcard {
@@ -428,7 +428,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .pm-foot { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.05); }
 .pm-scores { font-size: 12px; color: var(--text2); }
 .pm-final { font-family: var(--mono); font-size: 20px; font-weight: 700; }
-
+ 
 /* ── 大盤橫幅 ── */
 .banner {
   border-radius: 10px; padding: 13px 18px; margin-bottom: 14px;
@@ -443,7 +443,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 .banner.y { border-left-color: var(--Y); color: var(--Y); }
 .banner.o { border-left-color: var(--O); color: var(--O); }
 .banner.r { border-left-color: var(--R); color: var(--R); }
-
+ 
 /* ── 篩選 ── */
 .filter-bar { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
 .f-item { display: flex; align-items: center; gap: 5px; }
@@ -455,7 +455,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
   transition: all 0.15s; backdrop-filter: blur(8px);
 }
 .inp:focus { border-color: rgba(255,255,255,0.28); box-shadow: 0 0 0 2px rgba(255,255,255,0.05); }
-
+ 
 /* ── 頁面標題 ── */
 .ph { margin-bottom: 16px; }
 .ph-title { font-size: 20px; font-weight: 700; letter-spacing: -0.2px; }
@@ -463,9 +463,9 @@ tr:hover td { background: rgba(255,255,255,0.02); }
 </style>
 </head>
 <body>
-
+ 
 <canvas id="star-canvas"></canvas>
-
+ 
 <!-- 密碼頁 -->
 <div id="lock">
   <div class="lock-wrap">
@@ -479,7 +479,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
     </div>
   </div>
 </div>
-
+ 
 <!-- 主系統 -->
 <div id="app">
 <nav class="nav">
@@ -496,12 +496,12 @@ tr:hover td { background: rgba(255,255,255,0.02); }
     <div class="nupd" id="nupd">--</div>
   </div>
 </nav>
-
+ 
 <div class="main">
-
+ 
 <!-- ══ 大盤 ══ -->
 <div class="pg on" id="pg-market">
-
+ 
   <!-- 信心指數 -->
   <div class="conf-panel lvl-y" id="cpanel">
     <div class="conf-layout">
@@ -518,7 +518,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
       </div>
     </div>
   </div>
-
+ 
   <!-- 6 ETF -->
   <div class="g6" style="margin-bottom:14px">
     <div class="ecard neu-bar" id="ec-qqq">
@@ -564,7 +564,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
       <div class="e-note" id="en-vix">--</div>
     </div>
   </div>
-
+ 
   <div class="g2">
     <!-- 指標詳情 -->
     <div class="panel panel-g">
@@ -617,7 +617,7 @@ tr:hover td { background: rgba(255,255,255,0.02); }
     </div>
   </div>
 </div>
-
+ 
 <!-- ══ 盤前 ══ -->
 <div class="pg" id="pg-premarket">
   <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:12px">
@@ -630,9 +630,9 @@ tr:hover td { background: rgba(255,255,255,0.02); }
       <button class="btn btn-g" id="pm-btn" onclick="scanPM()">⟳ 重新掃描</button>
     </div>
   </div>
-
+ 
   <div id="pm-banner"></div>
-
+ 
   <div class="panel" style="padding:12px 18px;margin-bottom:14px">
     <div class="filter-bar">
       <div class="f-item"><span class="f-lbl">漲幅≥</span><input class="inp" type="number" id="fc" value="2" step="0.5" style="width:56px"><span class="f-lbl">%</span></div>
@@ -640,9 +640,9 @@ tr:hover td { background: rgba(255,255,255,0.02); }
       <div class="f-item"><span class="f-lbl">股價</span><input class="inp" type="number" id="fp1" value="5" style="width:52px"><span class="f-lbl">~</span><input class="inp" type="number" id="fp2" value="200" style="width:58px"></div>
     </div>
   </div>
-
+ 
   <div class="pm-grid" id="pm-top"><div class="empty">點「重新掃描」獲取今日數據</div></div>
-
+ 
   <div class="panel" style="padding:0;overflow:hidden">
     <div class="tbl"><table>
       <thead><tr>
@@ -654,16 +654,16 @@ tr:hover td { background: rgba(255,255,255,0.02); }
     </table></div>
   </div>
 </div>
-
+ 
 </div></div>
-
+ 
 <script>
 const FMP  = 'IoPRCJ0d907kdhMBwWmgH8on0loCOGBA';
 const BASE = 'https://financialmodelingprep.com/stable';
 const PW_H = '0942a2760d0547a4d90ebb9a7ddb95b5caf33d07dab0023bc4790cfc6db912e2';
-
+ 
 let M = { qd:0, sd:0, qStop:0, sStop:0, smhC:0, iwmC:0, drop:0, vix:0, conf:50, lvl:'y' };
-
+ 
 // ── 密碼 ──
 async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join('');}
 async function unlock(){
@@ -685,7 +685,7 @@ if(sessionStorage.getItem('sa')==='1'){
   document.getElementById('app').style.display='block';
   window.addEventListener('load',init);
 }
-
+ 
 // ── 頁面 ──
 function go(n,el){
   document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
@@ -693,7 +693,7 @@ function go(n,el){
   document.getElementById('pg-'+n).classList.add('on');
   if(el)el.classList.add('on');
 }
-
+ 
 // ── FMP ──
 async function fmpGet(p){try{const s=p.includes('?')?'&':'?';const r=await fetch(`${BASE}${p}${s}apikey=${FMP}`);if(!r.ok)return null;return await r.json();}catch{return null;}}
 async function fmpQ(t){const d=await fmpGet(`/quote?symbol=${t}`);return d&&d.length?d[0]:null;}
@@ -701,7 +701,7 @@ async function fmpH(t,n){const d=await fmpGet(`/historical-price-eod/light?symbo
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 function fV(v){if(!v||v===0)return '--';if(v>=1e6)return(v/1e6).toFixed(1)+'M';if(v>=1e3)return(v/1e3).toFixed(0)+'K';return v;}
 function fC(m){if(!m||m===0)return '--';if(m>=1e9)return'$'+(m/1e9).toFixed(1)+'B';if(m>=1e6)return'$'+(m/1e6).toFixed(0)+'M';return'$'+m;}
-
+ 
 // ── ETF 卡片更新 ──
 function setETF(id,q,invert){
   if(!q) return;
@@ -715,9 +715,9 @@ function setETF(id,q,invert){
   eg.textContent=(c>=0?'+':'')+c.toFixed(2)+'%';
   eg.className='e-chg '+(isUp?'up':'dn');
 }
-
+ 
 function calcDU(cl){let dn=0,up=0;for(let i=cl.length-1;i>0;i--){if(cl[i]<cl[i-1])dn++;else break;}for(let i=cl.length-1;i>0;i--){if(cl[i]>cl[i-1])up++;else break;}return{dn,up};}
-
+ 
 // ── 初始化 ──
 async function init(){
   setInterval(()=>document.getElementById('ntime').textContent=new Date().toLocaleTimeString('zh-TW'),1000);
@@ -726,7 +726,7 @@ async function init(){
   setInterval(loadMarket, 5*60*1000);
   setInterval(scanPM, 10*60*1000);
 }
-
+ 
 // ── 大盤 ──
 async function loadMarket(){
   const [qqq,soxx,smh,spy,iwm,vix]=await Promise.all([
@@ -734,7 +734,7 @@ async function loadMarket(){
   ]);
   setETF('qqq',qqq); setETF('soxx',soxx); setETF('smh',smh);
   setETF('spy',spy); setETF('iwm',iwm); setETF('vix',vix,true);
-
+ 
   if(smh){ M.smhC=smh.changesPercentage||0; document.getElementById('en-smh').textContent=M.smhC>=0?'先行指標強':'先行指標弱'; }
   if(iwm){ M.iwmC=iwm.changesPercentage||0; document.getElementById('en-iwm').textContent=M.iwmC>=1?'風險偏好強':M.iwmC>=-1?'風險中性':'風險迴避'; }
   if(vix){
@@ -745,7 +745,7 @@ async function loadMarket(){
   if(soxx){ const c=soxx.changesPercentage||0; document.getElementById('en-soxx').textContent=(c>=0?'今日+':'今日')+c.toFixed(2)+'%'; }
   if(qqq)  document.getElementById('en-qqq').textContent='距近期高點計算中';
   if(spy)  document.getElementById('en-spy').textContent=(spy.changesPercentage>=0?'大盤上漲':'大盤下跌');
-
+ 
   const qH=await fmpH('QQQ',15);
   if(qH){
     const cl=qH.map(d=>d.price||d.close),{dn,up}=calcDU(cl);
@@ -764,22 +764,22 @@ async function loadMarket(){
     document.getElementById('v-sd').textContent=dn;
     document.getElementById('v-sstop').textContent=up===0?'尚未止跌':up+'天';
   }
-
+ 
   document.getElementById('v-smh').textContent=(M.smhC>=0?'+':'')+M.smhC.toFixed(2)+'%';
   document.getElementById('v-smh').style.color=M.smhC>=0?'var(--G)':'var(--R)';
   document.getElementById('v-iwm').textContent=(M.iwmC>=0?'+':'')+M.iwmC.toFixed(2)+'%';
   document.getElementById('v-iwm').style.color=M.iwmC>=0?'var(--G)':'var(--R)';
-
+ 
   calcConf();
   document.getElementById('nupd').textContent='更新 '+new Date().toLocaleTimeString('zh-TW',{hour:'2-digit',minute:'2-digit'});
 }
-
+ 
 function adj(k,d){
   if(k==='qd'){M.qd=Math.max(0,M.qd+d);document.getElementById('v-qd').textContent=M.qd;}
   if(k==='sd'){M.sd=Math.max(0,M.sd+d);document.getElementById('v-sd').textContent=M.sd;}
   calcConf();
 }
-
+ 
 // ── 信心指數 ──
 function calcConf(){
   let sc=100; const rules=[];
@@ -790,42 +790,42 @@ function calcConf(){
   else if(M.qStop>=3){sc+=8;rules.push({s:'g',t:'QQQ連漲'+M.qStop+'天 · 趨勢強勁'});}
   else if(M.qStop>=1){sc+=4;rules.push({s:'g',t:'QQQ止跌反彈'+M.qStop+'天'});}
   else rules.push({s:'g',t:'QQQ正常 · 無連跌'});
-
+ 
   if(M.sd>=3){sc-=25;rules.push({s:'r',t:'SOXX連跌'+M.sd+'天 · 半導體嚴重弱'});}
   else if(M.sd===2){sc-=15;rules.push({s:'r',t:'SOXX連跌2天 · 偏弱'});}
   else if(M.sd===1){sc-=6;rules.push({s:'y',t:'SOXX連跌1天 · 注意'});}
   else if(M.sStop>=2){sc+=5;rules.push({s:'g',t:'SOXX止跌回升'+M.sStop+'天'});}
   else rules.push({s:'g',t:'SOXX正常 · 無連跌'});
-
+ 
   if(M.smhC<=-2){sc-=10;rules.push({s:'r',t:'SMH跌'+Math.abs(M.smhC).toFixed(1)+'% · 先行指標弱'});}
   else if(M.smhC<0){sc-=4;rules.push({s:'y',t:'SMH小跌'});}
   else if(M.smhC>=2){sc+=8;rules.push({s:'g',t:'SMH漲'+M.smhC.toFixed(1)+'% · 先行強勢'});}
   else rules.push({s:'g',t:'SMH小漲 · 偏正面'});
-
+ 
   if(M.iwmC<=-1.5){sc-=8;rules.push({s:'r',t:'IWM跌'+Math.abs(M.iwmC).toFixed(1)+'% · 風險迴避'});}
   else if(M.iwmC<0){sc-=3;rules.push({s:'y',t:'IWM小跌 · 風險偏弱'});}
   else if(M.iwmC>=1.5){sc+=6;rules.push({s:'g',t:'IWM漲'+M.iwmC.toFixed(1)+'% · 風險偏好強'});}
   else rules.push({s:'g',t:'IWM正常 · 風險中性'});
-
+ 
   if(M.vix>=30){sc-=25;rules.push({s:'r',t:'VIX '+M.vix.toFixed(1)+' · 極度恐慌'});}
   else if(M.vix>=25){sc-=15;rules.push({s:'r',t:'VIX '+M.vix.toFixed(1)+' · 市場恐慌'});}
   else if(M.vix>=20){sc-=7;rules.push({s:'y',t:'VIX '+M.vix.toFixed(1)+' · 波動偏高'});}
   else if(M.vix>0){sc+=M.vix<15?6:0;rules.push({s:'g',t:'VIX '+M.vix.toFixed(1)+' · '+(M.vix<15?'低波動有利':'正常範圍')});}
-
+ 
   if(M.drop<-8){sc-=10;rules.push({s:'r',t:'距近期高點'+M.drop.toFixed(1)+'% · 跌幅大'});}
   else if(M.drop<-4){sc-=5;rules.push({s:'y',t:'距近期高點'+M.drop.toFixed(1)+'%'});}
   else if(M.drop>=-2){sc+=4;rules.push({s:'g',t:'接近近期高點 · 動能強'});}
   else rules.push({s:'g',t:'距高點'+M.drop.toFixed(1)+'% · 正常'});
-
+ 
   sc=Math.max(0,Math.min(100,sc)); M.conf=sc;
-
+ 
   let color,status,advice,lvl;
   if(sc>=80){color='var(--G)';status='🟢 積極操作';advice='大盤強勢，盤前可積極參與，信心充足';lvl='g';}
   else if(sc>=60){color='var(--Y)';status='🟡 正常操作';advice='大盤偏穩，選擇強勢標的，注意風報比';lvl='y';}
   else if(sc>=40){color='var(--O)';status='🟠 謹慎操作';advice='大盤偏弱，縮小倉位，只做最強的標的';lvl='o';}
   else{color='var(--R)';status='🔴 建議觀望';advice='大盤弱勢，不追價，保留資金等待機會';lvl='r';}
   M.lvl=lvl;
-
+ 
   document.getElementById('cpanel').className='conf-panel lvl-'+lvl;
   document.getElementById('cscore').textContent=sc;
   document.getElementById('cscore').style.color=color;
@@ -834,7 +834,7 @@ function calcConf(){
   document.getElementById('cstatus').textContent=status;
   document.getElementById('cstatus').style.color=color;
   document.getElementById('cadvice').textContent=advice;
-
+ 
   // dots
   const dots=[
     ['d-qd',   M.qd===0?'g':M.qd<=2?'y':'r'],
@@ -847,7 +847,7 @@ function calcConf(){
     ['d-vix',  M.vix<20?'g':M.vix<25?'y':'r'],
   ];
   dots.forEach(([id,c])=>{const el=document.getElementById(id);if(el)el.className='mdot '+c;});
-
+ 
   // VIX tag
   const vt=document.getElementById('v-vix');
   if(M.vix>0){
@@ -857,17 +857,17 @@ function calcConf(){
     else if(M.vix<30){vt.textContent=M.vix.toFixed(1)+' 恐慌';vt.className='tag to';}
     else{vt.textContent=M.vix.toFixed(1)+' 極度恐慌';vt.className='tag tr';}
   }
-
+ 
   // 指引
   document.getElementById('guide-list').innerHTML=rules.slice(0,6).map(r=>`
     <div class="guide-row">
       <span class="guide-icon">${r.s==='g'?'✅':r.s==='y'?'⚠️':'❌'}</span>
       <span class="guide-txt" style="color:${r.s==='g'?'var(--G)':r.s==='y'?'var(--Y)':'var(--R)'}">${r.t}</span>
     </div>`).join('');
-
+ 
   updateBanner();
 }
-
+ 
 function updateBanner(){
   const s=M.conf,l=M.lvl;
   const icons={g:'🟢',y:'🟡',o:'🟠',r:'🔴'};
@@ -877,31 +877,31 @@ function updateBanner(){
   document.getElementById('pm-banner').innerHTML=`<span style="font-size:16px">${icons[l]}</span><span>${texts[l]}</span>`;
   document.getElementById('pm-tag').innerHTML=`<span class="tag ${tc[l]}">信心 ${s}/100</span>`;
 }
-
+ 
 // ══════════════════════════════════════════
 // 深空星圖背景動畫
 // ══════════════════════════════════════════
 (function(){
   const canvas = document.getElementById('star-canvas');
   const ctx = canvas.getContext('2d');
-
+ 
   const TICKERS = [
     'NVDA','TSLA','PLTR','AAPL','MSFT','GOOGL','META','AMZN',
     'QQQ','SPY','SOXX','SMH','MU','NBIS','RKLB','ONDS','AXTI',
     'TSM','LITE','VRT','LEU','SOFI','IREN','BBAI','NVTS'
   ];
-
+ 
   let W, H, stars = [], nebulas = [];
-
+ 
   function resize(){
     W = canvas.width  = window.innerWidth;
     H = canvas.height = window.innerHeight;
   }
-
+ 
   function initStars(){
     stars = [];
     nebulas = [];
-
+ 
     // 小背景星點（純白點）
     for(let i = 0; i < 200; i++){
       stars.push({
@@ -916,7 +916,7 @@ function updateBanner(){
         pulseSpeed: 0.005 + Math.random() * 0.015,
       });
     }
-
+ 
     // 股票星（帶標籤，漲綠跌紅）
     for(let i = 0; i < TICKERS.length; i++){
       const up = Math.random() > 0.45;
@@ -936,7 +936,7 @@ function updateBanner(){
         showLabel: Math.random() > 0.4,
       });
     }
-
+ 
     // 星雲光暈（大型柔光球）
     for(let i = 0; i < 4; i++){
       nebulas.push({
@@ -951,11 +951,11 @@ function updateBanner(){
       });
     }
   }
-
+ 
   let frame = 0;
   function draw(){
     ctx.clearRect(0, 0, W, H);
-
+ 
     // 星雲
     nebulas.forEach(n => {
       n.t += 0.003;
@@ -974,33 +974,33 @@ function updateBanner(){
       ctx.fillStyle = gr;
       ctx.fill();
     });
-
+ 
     // 小星點
     stars.forEach(s => {
       s.x = (s.x + s.vx + W) % W;
       s.y = (s.y + s.vy + H) % H;
       s.pulse += s.pulseSpeed;
       const blink = 0.7 + 0.3 * Math.sin(s.pulse);
-
+ 
       if(s.type === 'dot'){
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(220,230,255,${s.alpha * blink})`;
         ctx.fill();
       }
-
+ 
       if(s.type === 'ticker'){
         // 淡入
         s.alpha = Math.min(s.targetAlpha, s.alpha + 0.003);
         const a = s.alpha * blink;
         const col = s.up ? '34,197,94' : '239,68,68';
-
+ 
         // 星點核心
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(${col},${a})`;
         ctx.fill();
-
+ 
         // 發光光暈
         const glow = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.size * 4);
         glow.addColorStop(0, `rgba(${col},${a * 0.4})`);
@@ -1009,7 +1009,7 @@ function updateBanner(){
         ctx.arc(s.x, s.y, s.size * 4, 0, Math.PI * 2);
         ctx.fillStyle = glow;
         ctx.fill();
-
+ 
         // Ticker 標籤（只有亮度夠才顯示）
         if(s.showLabel && blink > 0.75 && a > 0.2){
           ctx.font = `${Math.round(Math.max(10, W * 0.009))}px 'IBM Plex Mono', monospace`;
@@ -1018,7 +1018,7 @@ function updateBanner(){
         }
       }
     });
-
+ 
     // 偶爾有流星
     if(frame % 300 === 0){
       const sx = Math.random() * W * 0.6;
@@ -1035,17 +1035,17 @@ function updateBanner(){
       ctx.lineWidth = 1;
       ctx.stroke();
     }
-
+ 
     frame++;
     requestAnimationFrame(draw);
   }
-
+ 
   resize();
   initStars();
   draw();
   window.addEventListener('resize', () => { resize(); initStars(); });
 })();
-
+ 
 async function scanPM(){
   const btn=document.getElementById('pm-btn');
   btn.disabled=true; btn.textContent='掃描中...';
@@ -1053,7 +1053,7 @@ async function scanPM(){
   document.getElementById('pm-body').innerHTML='<tr><td colspan="11" class="loading"><div class="spin"></div></td></tr>';
   updateBanner();
   try{
-    const d=await fmpGet('/stock_market/gainers');
+    const d=await fetch(`https://financialmodelingprep.com/api/v3/stock_market/gainers?apikey=${FMP}`).then(r=>r.json()).catch(()=>null);
     if(!d||!d.length)throw new Error('無數據（可能是休市）');
     const minC=parseFloat(document.getElementById('fc').value)||2;
     const minM=parseFloat(document.getElementById('fm').value)||500;
@@ -1070,7 +1070,7 @@ async function scanPM(){
   }
   btn.disabled=false; btn.textContent='⟳ 重新掃描';
 }
-
+ 
 function bSc(s){
   let sc=0;
   const c=s.changesPercentage||0,v=s.volume||0,m=(s.marketCap||0)/1e6,p=s.price||0;
@@ -1092,7 +1092,7 @@ function verd(f){
   if(f>=4) return{c:'to',t:'⚠️ 謹慎考慮'};
   return{c:'tr',t:'❌ 建議跳過'};
 }
-
+ 
 function renderTop(arr){
   if(!arr.length){document.getElementById('pm-top').innerHTML='<div class="empty">無符合條件的標的</div>';return;}
   const rk=['pm1','pm2','pm3'],md=['🥇','🥈','🥉'];
@@ -1120,7 +1120,7 @@ function renderTop(arr){
     </div>`;
   }).join('');
 }
-
+ 
 function renderTbl(arr){
   if(!arr.length){document.getElementById('pm-body').innerHTML='<tr><td colspan="11" class="empty">無符合條件的標的</td></tr>';return;}
   document.getElementById('pm-body').innerHTML=arr.map((s,i)=>{
