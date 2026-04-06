@@ -707,24 +707,29 @@ async function pgQuote(symbol){
     const d=await r.json();
     if(!d||!d.ticker)return null;
     const t=d.ticker;
-    const price=t.day?.c||t.lastTrade?.p||0;
+    const price=t.day?.c||t.prevDay?.c||0;
     const prev=t.prevDay?.c||0;
-    const chg=prev?((price-prev)/prev*100):0;
+    const chg=t.todaysChangePerc||( prev?((price-prev)/prev*100):0 );
     return{price,changesPercentage:chg};
   }catch{return null;}
 }
 
 async function pgVix(){
   try{
-    // VIX via indices snapshot
-    const r=await fetch(`https://api.polygon.io/v2/snapshot/locale/us/markets/indices/tickers/I:VIX?apiKey=${PG}`);
+    // 用 UVXY 漲跌方向 + 昨日 VIX 收盤 估算今日 VIX
+    // 先抓前幾日 VIX 歷史價（polygon 免費可抓到）
+    const to=new Date().toISOString().slice(0,10);
+    const from=new Date(Date.now()-10*24*3600*1000).toISOString().slice(0,10);
+    const r=await fetch(`https://api.polygon.io/v2/aggs/ticker/I:VIX/range/1/day/${from}/${to}?adjusted=true&sort=desc&limit=2&apiKey=${PG}`);
     const d=await r.json();
-    if(!d||!d.results)return null;
-    const res=d.results;
-    const price=res.value||res.session?.close||0;
-    const prev=res.prevDay?.value||res.previousSession?.close||0;
-    const chg=prev?((price-prev)/prev*100):0;
-    return{price,changesPercentage:chg};
+    if(d&&d.results&&d.results.length){
+      const latest=d.results[0];
+      const prev=d.results[1]||latest;
+      const price=latest.c;
+      const chg=prev.c?((price-prev.c)/prev.c*100):0;
+      return{price,changesPercentage:chg};
+    }
+    return null;
   }catch{return null;}
 }
 
@@ -781,16 +786,24 @@ async function loadMarket(){
     pgQuote('QQQ'),pgQuote('SOXX'),pgQuote('SMH'),pgQuote('SPY'),pgQuote('IWM'),pgVix()
   ]);
   setETF('qqq',qqq); setETF('soxx',soxx); setETF('smh',smh);
-  setETF('spy',spy); setETF('iwm',iwm); setETF('vix',vix,true);
+  setETF('spy',spy); setETF('iwm',iwm);
 
-  if(smh){ M.smhC=smh.changesPercentage||0; document.getElementById('en-smh').textContent=M.smhC>=0?'先行指標強':'先行指標弱'; }
-  if(iwm){ M.iwmC=iwm.changesPercentage||0; document.getElementById('en-iwm').textContent=M.iwmC>=1?'風險偏好強':M.iwmC>=-1?'風險中性':'風險迴避'; }
+  // VIX 單獨處理
   if(vix){
     M.vix=vix.price||0;
-    const v=M.vix,en=document.getElementById('en-vix');
+    const v=M.vix;
+    const card=document.getElementById('ec-vix');
+    if(card) card.className='ecard '+(v>=25?'dn-bar':v>=18?'neu-bar':'up-bar');
+    document.getElementById('ep-vix').textContent=v.toFixed(2);
+    const vc=vix.changesPercentage||0;
+    const eg=document.getElementById('eg-vix');
+    eg.textContent=(vc>=0?'+':'')+vc.toFixed(2)+'%';
+    eg.className='e-chg '+(vc>=0?'dn':'up'); // VIX漲=市場跌=紅
+    const en=document.getElementById('en-vix');
     en.textContent=v<15?'極低波動':v<20?'低波動':v<25?'偏高注意':v<30?'恐慌':'極度恐慌';
   }
-  if(soxx){const c=soxx.changesPercentage||0;document.getElementById('en-soxx').textContent=(c>=0?'今日+':'今日')+c.toFixed(2)+'%';}
+  if(smh){ M.smhC=smh.changesPercentage||0; document.getElementById('en-smh').textContent=M.smhC>=0?'先行指標強':'先行指標弱'; }
+  if(iwm){ M.iwmC=iwm.changesPercentage||0; document.getElementById('en-iwm').textContent=M.iwmC>=1?'風險偏好強':M.iwmC>=-1?'風險中性':'風險迴避'; }
   if(qqq) document.getElementById('en-qqq').textContent='距近期高點計算中';
   if(spy) document.getElementById('en-spy').textContent=(spy.changesPercentage>=0?'大盤上漲':'大盤下跌');
 
