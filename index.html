@@ -594,6 +594,10 @@ tr:hover td { background: rgba(255,255,255,0.02); }
         <span class="mval" id="v-sstop">--</span>
       </div>
       <div class="mrow">
+        <div class="m-left"><span class="mdot" id="d-sdrop"></span><span class="mlbl">SOXX 距近期高點</span><span class="mauto">自動</span></div>
+        <span class="mval" id="v-sdrop">--</span>
+      </div>
+      <div class="mrow">
         <div class="m-left"><span class="mdot" id="d-smh"></span><span class="mlbl">SMH 今日</span><span class="mauto">自動</span></div>
         <span class="mval" id="v-smh">--</span>
       </div>
@@ -747,7 +751,7 @@ async function init(){
 // ── 大盤 ──
 async function loadMarket(){
   const [qqq,soxx,smh,spy,iwm,vix]=await Promise.all([
-    fhQuote('QQQ'),fhQuote('SOXX'),fhQuote('SMH'),fhQuote('SPY'),fhQuote('IWM'),fhQuote('VIX')
+    fhQuote('QQQ'),fhQuote('SOXX'),fhQuote('SMH'),fhQuote('SPY'),fhQuote('IWM'),fhQuote('CBOE:VIX')
   ]);
   setETF('qqq',qqq); setETF('soxx',soxx); setETF('smh',smh);
   setETF('spy',spy); setETF('iwm',iwm); setETF('vix',vix,true);
@@ -763,8 +767,8 @@ async function loadMarket(){
   if(qqq) document.getElementById('en-qqq').textContent='距近期高點計算中';
   if(spy) document.getElementById('en-spy').textContent=(spy.changesPercentage>=0?'大盤上漲':'大盤下跌');
 
-  const [qCl,sCl]=await Promise.all([fhCandles('QQQ',30),fhCandles('SOXX',25)]);
-  if(qCl){
+  const [qCl,sCl]=await Promise.all([fhCandles('QQQ',45),fhCandles('SOXX',45)]);
+  if(qCl&&qCl.length>=2){
     const{dn,up}=calcDU(qCl);
     M.qd=dn; M.qStop=up;
     document.getElementById('v-qd').textContent=dn;
@@ -774,11 +778,19 @@ async function loadMarket(){
     document.getElementById('v-drop').textContent=M.drop.toFixed(1)+'%';
     document.getElementById('en-qqq').textContent='距近期高點 '+M.drop.toFixed(1)+'%';
   }
-  if(sCl){
+  if(sCl&&sCl.length>=2){
     const{dn,up}=calcDU(sCl);
     M.sd=dn; M.sStop=up;
     document.getElementById('v-sd').textContent=dn;
     document.getElementById('v-sstop').textContent=up===0?'尚未止跌':up+'天';
+    const speak=Math.max(...sCl.slice(-10));
+    const sdrop=((sCl[sCl.length-1]-speak)/speak*100);
+    M.sdrop=sdrop;
+    document.getElementById('v-sdrop').textContent=sdrop.toFixed(1)+'%';
+    document.getElementById('v-sdrop').style.color=sdrop>=-2?'var(--G)':'var(--R)';
+    const dd=document.getElementById('d-sdrop');
+    if(dd)dd.className='mdot '+(sdrop>=-2?'g':sdrop>=-5?'y':'r');
+    document.getElementById('en-soxx').textContent='距近期高點 '+sdrop.toFixed(1)+'%';
   }
 
   document.getElementById('v-smh').textContent=(M.smhC>=0?'+':'')+M.smhC.toFixed(2)+'%';
@@ -1069,11 +1081,17 @@ async function scanPM(){
   document.getElementById('pm-body').innerHTML='<tr><td colspan="11" class="loading"><div class="spin"></div></td></tr>';
   updateBanner();
   try{
-    // 固定觀察名單 — 半導體+科技+高動能股
-    const WATCH=['NVDA','AMD','TSLA','AAPL','MSFT','META','GOOGL','AMZN','PLTR','SMCI',
-      'MU','AVGO','QCOM','INTC','ARM','TSM','AMAT','LRCX','KLAC','MRVL',
-      'SOFI','RKLB','IONQ','NBIS','SOUN','BBAI','ASTS','LUNR','JOBY','ACHR',
-      'IREN','CORZ','MARA','RIOT','HUT','CLSK','WULF','BTBT','CIFR','BTDR'];
+    // AI + 半導體 + 科技核心清單
+    const WATCH=[
+      // 輝達生態系
+      'NVDA','NVDS','SMCI','DELL','HPE','ANET',
+      // 半導體
+      'AMD','AVGO','QCOM','MU','ARM','TSM','AMAT','LRCX','KLAC','MRVL','ONTO','WOLF','COHU',
+      // AI軟體/雲端
+      'PLTR','MSFT','GOOGL','META','AMZN','ORCL','CRM','SNOW','DDOG','MDB','AI','BBAI','SOUN','IONQ',
+      // 新興AI/機器人/太空
+      'TSLA','RKLB','ASTS','LUNR','JOBY','ACHR','NBIS','SERV','IREN','CORZ'
+    ];
     const minC=parseFloat(document.getElementById('fc').value)||2;
     const minP=parseFloat(document.getElementById('fp1').value)||5;
     const maxP=parseFloat(document.getElementById('fp2').value)||200;
